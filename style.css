@@ -1,0 +1,404 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+:root {
+    --accent: #00A357;
+    --accent2: #3A446B;
+}
+
+@font-face {
+    font-family: hammersmith one;
+    src: url(/fonts/Hammersmith_One/HammersmithOne-Regular.ttf);
+}
+@font-face {
+    font-family: montserrat;
+    src: url(/fonts/Montserrat/Montserrat-Italic-VariableFont_wght.ttf);
+    font-style: italic;
+}
+@font-face {
+    font-family: montserrat;
+    src: url(/fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
+}
+@font-face {
+    font-family: pt sans caption;
+    src: url(fonts/PT_Sans_Caption/PTSansCaption-Regular.ttf);
+}
+@font-face {
+    font-family: pt sans caption;
+    src: url(fonts/PT_Sans_Caption/PTSansCaption-Bold.ttf);
+    font-weight: bold;
+}
+
+h1, h2, h3, h4, h5, h6, button {
+    font-family: hammersmith one;
+    font-weight: 400;
+}
+p, span {
+    font-family: montserrat;
+}
+
+.header {
+    display:flex;
+    background-color: var(--accent);
+    color: white;
+    text-shadow: 2px 4px 4.3px rgba(0, 0, 0, 0.57);
+    font-weight: 400;
+    letter-spacing: -0.24px;
+    font-family: "Hammersmith One";
+    justify-content: end;
+    position: sticky;
+    top:0;
+}
+.header p {
+    margin:24px 42px 24px 42px;
+    text-wrap: nowrap;
+}
+input[type="text"] {
+    font-size: 20px;
+}
+
+/* login-stu.html, login-admin.html */
+.login-container {
+    margin: 12vh auto auto auto;
+    text-align: center;
+    width: 812px;
+    height: 476px;
+    padding: 16px 76px 36px 76px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 12px;
+    box-shadow: 4px 4px 6px 3px rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.login-container h2 {
+    margin-bottom: 20px;
+}
+.login-txt {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.login-flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 42px;
+}
+
+.form-flex-container {
+    display: flex;
+    flex-direction: column;
+    width: 226px;
+    height: 181px;
+}
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+}
+.login-txt, #email, #password,
+.login-btn, .admin-btn {
+    margin-bottom: 12px;
+}
+
+#email, #password {
+    padding: 12px;
+    background-color: #f2f2f2;
+    border: none;
+    margin-bottom: 8px;
+    border-radius: 6px;
+}
+
+.login-btn, .admin-btn, .stu-btn {
+    padding: 10px 22px 10px 22px;
+    color: white;
+    border: none;
+    width: 104px;
+    height: 39px;
+    border-radius: 6px;
+}
+
+.login-btn {
+    background-color: #F1A64F;
+}
+
+.login-icon {
+    width: 236px;
+    height: 236px;
+    margin-right: 79px;
+}
+
+/* login-stu.html */
+.login-stu-body {
+    background-color: var(--accent);
+}
+.admin-btn {
+    background-color: #3A436A;
+}
+
+/* login-admin.html */
+.login-admin-body {
+    background-color: var(--accent2);
+}
+.stu-btn {
+    background-color: var(--accent);
+}
+
+
+
+/* feedback-form.html */
+form * {
+    font-family: hammersmith one;
+}
+
+.form-landing-container {
+    background-color: #018B4B;
+    height: 464px;
+    display: flex;
+}
+.form-landing-txt {
+    color:white;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-landing-container h6 {
+    font-size: 18px;
+    align-self: center;
+}
+
+.form-landing-container div {
+    align-self: center;
+}
+
+.form-landing-container h1 {
+    font-size: 72px;
+}
+.form-landing-container img {
+    width: 600px;
+    height: 365px;
+    align-self: flex-end;
+}
+
+.form-container {
+    width: auto;
+    max-width: 1000px;
+    min-width: fit-content;
+    height: auto;
+    background-color: #D5F9E4;
+    margin: 42px auto 42px auto;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.28);
+}
+
+.feedback-section {
+    display:flex;
+    margin-bottom: 24px;
+    flex-direction: column;
+}
+
+#feedback-nature, #description {
+    padding: 16px 17px;
+    border-radius: 14px;
+    border: none;
+}
+
+.attachment-file-container, .radio-container {
+    background-color: white;
+    padding:14px;
+    border-radius: 14px;
+}
+
+#description {
+    resize: none;
+}
+.radio-container {
+    width:fit-content;
+    display: flex;
+}
+.radio-container > div {
+    margin-right: 20px;
+}
+
+.suggestion-container > input,
+.concern-container > input {
+    margin-right: 8px;
+}
+
+.college-dropdown-container > select {
+    display:flex;
+}
+
+.feedback-submit {
+    background-color: #1B2F35;
+    color: white;
+    border-radius: 36px;
+    font-size: 24px;
+    letter-spacing: 7.2px;
+    padding: 24px 54px 24px 54px;
+    width: fit-content;
+}
+.submit-container {
+    align-items: center;
+}
+
+#college {
+    padding:8px;
+    border-radius: 14px;
+}
+
+.feedback-form-body {
+    background-color: #0b1129;
+}
+
+.category-college {
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.category-college > :nth-child(1) {
+    flex-basis: 40%
+}
+
+.category-college > :nth-child(2) {
+    flex-basis: 60%;
+}
+
+
+/* stu-feedback-log.html */
+.feedback-log-container {
+    display:flex;
+    /* background-color: #e5ffe7; */
+}
+
+.feedback-log-container > * {
+    padding:16px;
+}
+
+.log-left {
+    max-width: fit-content;
+    border-style: none solid none none;
+    border-width: 1px;
+    border-color: rgb(157, 157, 157);
+}
+
+.log-left > * {
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.log-left > :nth-child(1) {
+    margin-bottom:32px;
+    border-radius: 12px;
+    border-style: solid;
+    border-width: 1px;
+    padding:12px;
+}
+
+.log-selectables {
+    display:flex;
+    text-wrap:nowrap;
+}
+
+.log-right {
+    flex-basis:100%;
+}
+
+.log-right span {
+    margin:auto;
+}
+
+.feedback-item,
+.feedback-header {
+    display:grid;
+    grid-template-columns: 70% 1fr 1fr 1fr;
+    min-width: fit-content;
+}
+
+.feedback-header {
+    border-bottom: 1px solid rgb(92, 92, 92);
+}
+
+
+
+.feedback-item > *,
+.feedback-header > * {
+    margin: 4px;
+    text-align: center;
+}
+
+.inbox-title-column {
+    grid-column:1/2;
+}
+
+.inbox-category-column {
+    grid-column: 2/3;
+}
+.inbox-status-column {
+    grid-column: 3/4;
+}
+.inbox-date-column {
+    grid-column: 4/5;
+    text-wrap: nowrap;
+}
+
+.feedback-item-section {
+    grid-column: 1/2;
+    display:flex;
+}
+
+.inbox-icon,
+.inbox-office,
+.inbox-seperator {
+    flex-basis:5%;
+    padding-right: 8px;
+}
+
+.inbox-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+    flex-basis: 85%;
+
+    /*idk kung anong pinaglalagay ko dito, nag ooverflow kasi aaaaaa*/
+    min-width: 85%;
+    max-width: 0;
+    flex: auto;
+}
+
+.inbox-category {
+    grid-column: 2/3;
+}
+
+.inbox-status {
+    grid-column: 3/4;
+    background-color: #77E9C2;
+    padding:6px;
+    border-radius: 12px;
+}
+
+.inbox-date {
+    grid-column: 4/5;
+}
+
+.feedback-header {
+    padding-bottom: 8px;
+    margin-bottom: 6px;
+}
+.feedback-item {
+    margin: 6px 0px 6px 0px
+}
+
+.test {
+    background-color: #FBDD8F;
+}
+
+.test2 {
+    background-color: #68A8EB;
+}

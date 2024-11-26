@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Feedback Form</title>
+</head>
+<body class="feedback-form-body">
+    <header class="header">
+        <p>FEEDBACK LOG</p>
+        <P>PROFILE</P>
+        <P>LOG OUT</P>
+    </header>
+    <div class="form-landing-container">
+        <img src="/pics/feedback-from-img-cropped.png">
+        <div class="form-landing-txt">
+        <h1>SHARE YOUR EXPERIENCE</h1>
+        <h6>Your feedback is valuable to us and helps improve the university experience for everyone!</h6>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <form>
+            <div class="feedback-section">
+                <label for="feedback-nature">Nature of the Feedback</label>
+                <input type="text" id="feedback-nature" placeholder="Enter the summary or title of your feedback" required></input>
+            </div>
+
+            <div class="feedback-section">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" placeholder="Please describe your feedback in detail" rows="12" required></textarea>
+            </div>
+
+            <div class="feedback-section">
+                <label for="attachment">Attachment/Proof</label>
+                <div class="attachment-file-container">
+                    <input type="file" id="attachment" name="filename">
+                </div>
+            </div>
+            
+            <div class="category-college">
+                <div class="feedback-section">
+                    <label for="feedback-category">Feedback Category</label>
+                    <div class="radio-container">
+                        <div class="suggestion-container">
+                            <input type="radio" id="suggestion" name="feedback-category" value="suggestion" required><label>Suggestion</label>
+                        </div>
+                        <div class="concern-container">
+                            <input type="radio" id="concern" name="feedback-category" value="concern"><label>Concern</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feedback-section">
+                    <label for="college" required>Relevant College</label>
+                    <select name="college" id="college" required>
+                        <!-- idk proper value so nag based ako sa acronym. added "College of" if di abot ng 3 characters-->
+                        <option disabled selected value>Select College</option>
+                        <option value="BAA">Business Administration and Accountancy</option>
+                        <option value="CJE">Criminal Justice Education</option>
+                        <option value="COE">Education</option>
+                        <option value="EAT">Engineering, Architecture and Technology</option>
+                        <option value="ICS">Information and Computer Studies</option>
+                        <option value="LAC">Liberal Arts and Communication</option>
+                        <option value="THM">Tourism and Hospitality Management</option>
+                        <option value="COS">Science</option>
+                    </select>
+                </div>
+            </div>
+            <div class="feedback-section submit-container"><input class="feedback-submit" type="submit" value="SUBMIT FEEDBACK"></div>
+        </form>
+    </div>
+</body>
+</html>

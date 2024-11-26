@@ -1,0 +1,12 @@
+Note:
+- put commits in commit-msg.text for multi-line messages, tho pwede rin normal commit message lang
+- may use "git commit -F commit-msg.txt" in terminal
+
+known issues:
+- svg icon in login-admin.html and login-stu.html do not have the right colors
+- inbox feedback title overflow for stu-feedback-log.html
+	- lengthy feedback titles lead to expanding of grid
+	- used band aid solution for now
+- inbox right-most text header overflow for stu-feedback-log.html
+- used dark background instead of image used in figma for feedback-form.html
+	- background image is provided in pics folder

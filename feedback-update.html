@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Update Feedback</title>
+</head>
+<body class="feedback-form-body">
+    <header class="header">
+        <a href="#"><p>FEEDBACK LOG</p></a>
+        <a href="./profile.html"><p>PROFILE</p></a>
+        <a href="#"><p>LOG OUT</p></a>
+    </header>
+
+    <div class="form-container">
+        <form>
+            <div class="feedback-section">
+                <label for="description">Update Message</label>
+                <textarea id="description" name="description" placeholder="Please provide an update message to the user" rows="12" required></textarea>
+            </div>
+
+            <div class="feedback-section">
+                <label for="attachment">Attachment</label>
+                <div class="attachment-file-container">
+                    <input type="file" id="attachment" name="filename">
+                </div>
+            </div>
+            
+            <div class="category-college">
+                <div class="feedback-section">
+                    <label for="feedback-status-update">Feedback Status Update</label>
+                    <div class="radio-container">
+                        <div class="radio-inner-container">
+                            <input type="radio" id="pending" name="feedback-status-update" value="pending" required><label>Pending</label>
+                        </div>
+                        <div class="radio-inner-container">
+                            <input type="radio" id="ongoing" name="feedback-status-update" value="ongoing"><label>Ongoing</label>
+                        </div>
+                        <div class="radio-inner-container">
+                            <input type="radio" id="resolved" name="feedback-status-update" value="resolved"><label>Resolved</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="feedback-section submit-container"><input class="feedback-submit" type="submit" value="SUBMIT FEEDBACK"></div>
+        </form>
+    </div>
+</body>
+</html>

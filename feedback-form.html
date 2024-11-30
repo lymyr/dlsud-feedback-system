@@ -8,12 +8,12 @@
 </head>
 <body class="feedback-form-body">
     <header class="header">
-        <p>FEEDBACK LOG</p>
-        <P>PROFILE</P>
-        <P>LOG OUT</P>
+        <a href="#"><p>FEEDBACK LOG</p></a>
+        <a href="./profile.html"><p>PROFILE</p></a>
+        <a href="#"><p>LOG OUT</p></a>
     </header>
     <div class="form-landing-container">
-        <img src="/pics/feedback-from-img-cropped.png">
+        <img src="./pics/feedback-from-img-cropped.png">
         <div class="form-landing-txt">
         <h1>SHARE YOUR EXPERIENCE</h1>
         <h6>Your feedback is valuable to us and helps improve the university experience for everyone!</h6>
@@ -43,10 +43,10 @@
                 <div class="feedback-section">
                     <label for="feedback-category">Feedback Category</label>
                     <div class="radio-container">
-                        <div class="suggestion-container">
+                        <div class="radio-inner-container">
                             <input type="radio" id="suggestion" name="feedback-category" value="suggestion" required><label>Suggestion</label>
                         </div>
-                        <div class="concern-container">
+                        <div class="radio-inner-container">
                             <input type="radio" id="concern" name="feedback-category" value="concern"><label>Concern</label>
                         </div>
                     </div>
@@ -68,6 +68,7 @@
                     </select>
                 </div>
             </div>
+            
             <div class="feedback-section submit-container"><input class="feedback-submit" type="submit" value="SUBMIT FEEDBACK"></div>
         </form>
     </div>

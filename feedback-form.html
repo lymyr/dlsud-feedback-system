@@ -23,8 +23,8 @@
     <div class="form-container">
         <form>
             <div class="feedback-section">
-                <label for="feedback-nature">Nature of the Feedback</label>
-                <input type="text" id="feedback-nature" placeholder="Enter the summary or title of your feedback" required></input>
+                <label for="title">Nature of the Feedback</label>
+                <input type="text" id="title" placeholder="Enter the summary or title of your feedback" required></input>
             </div>
 
             <div class="feedback-section">
@@ -44,10 +44,10 @@
                     <label for="feedback-category">Feedback Category</label>
                     <div class="radio-container">
                         <div class="radio-inner-container">
-                            <input type="radio" id="suggestion" name="feedback-category" value="suggestion" required><label>Suggestion</label>
+                            <input type="radio" id="suggestion" name="feedback-category" value="Suggestion" required><label>Suggestion</label>
                         </div>
                         <div class="radio-inner-container">
-                            <input type="radio" id="concern" name="feedback-category" value="concern"><label>Concern</label>
+                            <input type="radio" id="concern" name="feedback-category" value="Concern"><label>Concern</label>
                         </div>
                     </div>
                 </div>
@@ -57,14 +57,14 @@
                     <select name="college" id="college" required>
                         <!-- idk proper value so nag based ako sa acronym. added "College of" if di abot ng 3 characters-->
                         <option disabled selected value>Select College</option>
-                        <option value="BAA">Business Administration and Accountancy</option>
-                        <option value="CJE">Criminal Justice Education</option>
-                        <option value="COE">Education</option>
-                        <option value="EAT">Engineering, Architecture and Technology</option>
-                        <option value="ICS">Information and Computer Studies</option>
-                        <option value="LAC">Liberal Arts and Communication</option>
-                        <option value="THM">Tourism and Hospitality Management</option>
-                        <option value="COS">Science</option>
+                        <option value="College of Business Administration and Accountancy">Business Administration and Accountancy</option>
+                        <option value="College of Criminal Justice Education">Criminal Justice Education</option>
+                        <option value="College of Education">Education</option>
+                        <option value="College of Engineering, Architecture and Technology">Engineering, Architecture and Technology</option>
+                        <option value="College of Information and Computer Studies">Information and Computer Studies</option>
+                        <option value="College of Liberal Arts and Communication">Liberal Arts and Communication</option>
+                        <option value="College of Tourism and Hospitality Management">Tourism and Hospitality Management</option>
+                        <option value="College of Science">Science</option>
                     </select>
                 </div>
             </div>
@@ -72,5 +72,6 @@
             <div class="feedback-section submit-container"><input class="feedback-submit" type="submit" value="SUBMIT FEEDBACK"></div>
         </form>
     </div>
+    <script type="module" src="create-feedback.js"></script>
 </body>
 </html>

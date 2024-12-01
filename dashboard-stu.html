@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Feedback Portal</title>
+    <script type="module" src="./fetch-feedback.js"></script> <!-- Include fetch-feedback.js -->
 </head>
 <body>
     <div class="dashboard-stu-landing">
@@ -21,21 +22,24 @@
         <img src="./pics/dashboard-stu-background.png">
     </div>
 
-    
     <div class="stu-feedback-status-container">
         <h1>FEEDBACK STATUS</h1>
-            <div class="stu-feedback-status-blocks">
-                <div class="stu-feedback-status status-review">
-                    <h1>321</h1>
-                    <h6>TO BE REVIEWED</h6>
-                </div>
-                <div class="stu-feedback-status status-ongoing">
-                    <h1>885</h1>
-                    <h6>ONGOING</h6>
-                </div>
-                <div class="stu-feedback-status status-resolved">
-                    <h1>32</h1>
-                    <h6>RESOLVED</h6>
+        <div class="stu-feedback-status-blocks">
+            <div class="stu-feedback-status status-review">
+                <h1 id="total-feedback">0</h1> <!-- Total Feedback -->
+                <h6>TOTAL FEEDBACKS</h6>
+            </div>
+            <div class="stu-feedback-status status-review">
+                <h1 id="pending-feedback">0</h1> <!-- Pending Feedback -->
+                <h6>TO BE REVIEWED</h6>
+            </div>
+            <div class="stu-feedback-status status-ongoing">
+                <h1 id="ongoing-feedback">0</h1> <!-- Ongoing Feedback -->
+                <h6>ONGOING</h6>
+            </div>
+            <div class="stu-feedback-status status-resolved">
+                <h1 id="resolved-feedback">0</h1> <!-- Resolved Feedback -->
+                <h6>RESOLVED</h6>
             </div>
         </div>
     </div>

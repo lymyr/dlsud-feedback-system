@@ -49,8 +49,8 @@ auth.onAuthStateChanged(user => {
                         if (feedback.status === 'Pending') adminPendingCount++;
                         if (feedback.status === 'Ongoing') adminOngoingCount++;
                         if (feedback.status === 'Resolved') adminResolvedCount++;
-                        if (feedback.category === 'Suggestion') suggestionCount++;
-                        if (feedback.category === 'Concern') concernCount++;
+                        if (feedback.type === 'Suggestion') suggestionCount++;
+                        if (feedback.type === 'Concern') concernCount++;
                     }
                 });
 

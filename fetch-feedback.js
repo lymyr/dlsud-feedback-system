@@ -1,49 +1,73 @@
-import { database, auth } from './firebase.js'; // Import Firebase initialization
+import { database, auth } from './firebase.js';
 import { ref, onValue } from 'https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js';
 
-// Reference to the feedback collection in the database
-const feedbackRef = ref(database, 'feedbacks');
+// Function to display values in HTML if element exists
+function setElementTextContent(elementId, value) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.textContent = value;
+    }
+}
 
-auth.onAuthStateChanged((user) => {
+auth.onAuthStateChanged(user => {
     if (user) {
-        const currentUserUID = user.uid;
+        const uid = user.uid;
+        const feedbackRef = ref(database, 'feedbacks');
 
-        // Fetch feedbacks that match the current student UID
         onValue(feedbackRef, (snapshot) => {
             const feedbacks = snapshot.val();
 
-            let totalFeedback = 0;
-            let pendingFeedback = 0;
-            let ongoingFeedback = 0;
-            let resolvedFeedback = 0;
-
             if (feedbacks) {
-                // Loop through each feedback and categorize by status
-                Object.values(feedbacks).forEach((feedback) => {
-                    if (feedback.student === currentUserUID) {
-                        totalFeedback++;
-                        switch (feedback.status) {
-                            case 'Pending':
-                                pendingFeedback++;
-                                break;
-                            case 'Ongoing':
-                                ongoingFeedback++;
-                                break;
-                            case 'Resolved':
-                                resolvedFeedback++;
-                                break;
-                        }
+                // Student Dashboard Counters
+                let studentTotalFeedback = 0;
+                let studentPendingCount = 0;
+                let studentOngoingCount = 0;
+                let studentResolvedCount = 0;
+
+                // Admin Dashboard Counters
+                let adminTotalFeedback = 0;
+                let adminPendingCount = 0;
+                let adminOngoingCount = 0;
+                let adminResolvedCount = 0;
+                let suggestionCount = 0;
+                let concernCount = 0;
+
+                const userCollege = user.college || ''; // Assuming 'college' is stored in user profile
+
+                Object.values(feedbacks).forEach(feedback => {
+                    // For Students: Count feedbacks related to their UID
+                    if (feedback.student === uid) {
+                        studentTotalFeedback++;
+                        if (feedback.status === 'Pending') studentPendingCount++;
+                        if (feedback.status === 'Ongoing') studentOngoingCount++;
+                        if (feedback.status === 'Resolved') studentResolvedCount++;
+                    }
+
+                    // For Admins: Count feedbacks in their college
+                    if (feedback.college === userCollege) {
+                        adminTotalFeedback++;
+                        if (feedback.status === 'Pending') adminPendingCount++;
+                        if (feedback.status === 'Ongoing') adminOngoingCount++;
+                        if (feedback.status === 'Resolved') adminResolvedCount++;
+                        if (feedback.category === 'Suggestion') suggestionCount++;
+                        if (feedback.category === 'Concern') concernCount++;
                     }
                 });
-            }
 
-            // Update the HTML elements with the counts
-            document.getElementById('total-feedback').textContent = totalFeedback;
-            document.getElementById('pending-feedback').textContent = pendingFeedback;
-            document.getElementById('ongoing-feedback').textContent = ongoingFeedback;
-            document.getElementById('resolved-feedback').textContent = resolvedFeedback;
+                // Display Student Dashboard Values
+                setElementTextContent('total-feedback', studentTotalFeedback);
+                setElementTextContent('pending-feedback', studentPendingCount);
+                setElementTextContent('ongoing-feedback', studentOngoingCount);
+                setElementTextContent('resolved-feedback', studentResolvedCount);
+
+                // Display Admin Dashboard Values
+                setElementTextContent('admin-total-feedback', adminTotalFeedback);
+                setElementTextContent('admin-pending-feedback', adminPendingCount);
+                setElementTextContent('admin-ongoing-feedback', adminOngoingCount);
+                setElementTextContent('admin-resolved-feedback', adminResolvedCount);
+                setElementTextContent('suggestion-feedback', suggestionCount);
+                setElementTextContent('concern-feedback', concernCount);
+            }
         });
-    } else {
-        alert('Please log in to view feedbacks.');
     }
 });

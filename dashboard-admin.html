@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Admin Dashboard</title>
+    <script type="module" src="./fetch-feedback.js"></script> <!-- Include fetch-feedback.js -->
 </head>
 <body>
     <div class="dashboard-admin-landing">
@@ -29,7 +30,7 @@
         <h6>FEEDBACKS</h6>
         <div class="metrics-box-container">
             <div class="metrics-box total">
-                <h1>123123</h1>
+                <h1 id="admin-total-feedback">0</h1> <!-- Total Feedback -->
                 <h6>Total</h6>
             </div>
         </div>
@@ -39,15 +40,15 @@
         <h6>FEEDBACK STATUS</h6>
         <div class="metrics-box-container">
             <div class="metrics-box review">
-                <h1>123123</h1>
+                <h1 id="admin-pending-feedback">0</h1> <!-- Pending Feedback -->
                 <h6>To Be Reviewed</h6>
             </div>
             <div class="metrics-box ongoing">
-                <h1>123123</h1>
+                <h1 id="admin-ongoing-feedback">0</h1> <!-- Ongoing Feedback -->
                 <h6>Ongoing</h6>
             </div>
             <div class="metrics-box resolved">
-                <h1>123123</h1>
+                <h1 id="admin-resolved-feedback">0</h1> <!-- Resolved Feedback -->
                 <h6>Resolved</h6>
             </div>
         </div>
@@ -57,11 +58,11 @@
         <h6>FEEDBACK TYPES</h6>
         <div class="metrics-box-container">
             <div class="metrics-box concerns">
-                <h1>123123</h1>
+                <h1 id="concern-feedback">0</h1> <!-- Concern Feedback -->
                 <h6>Concerns</h6>
             </div>
             <div class="metrics-box suggestions">
-                <h1>123123</h1>
+                <h1 id="suggestion-feedback">0</h1> <!-- Suggestion Feedback -->
                 <h6>Suggestions</h6>
             </div>
         </div>

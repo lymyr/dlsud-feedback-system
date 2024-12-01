@@ -6,7 +6,7 @@ const feedbackForm = document.querySelector('form');
 const titleInput = document.querySelector('#title');
 const descriptionInput = document.querySelector('#description');
 const attachmentInput = document.querySelector('#attachment');
-const categoryRadioInputs = document.querySelectorAll('input[name="feedback-category"]');
+const typeRadioInputs = document.querySelectorAll('input[name="feedback-type"]');
 const collegeSelect = document.querySelector('#college');
 
 // Attach event listener to form submit
@@ -16,7 +16,7 @@ feedbackForm.addEventListener('submit', async (event) => {
     const title = titleInput.value;
     const description = descriptionInput.value;
     const attachment = attachmentInput.files[0] || null; // Handle file attachment
-    const category = [...categoryRadioInputs].find(input => input.checked)?.value;
+    const type = [...typeRadioInputs].find(input => input.checked)?.value;
     const college = collegeSelect.value;
     const user = auth.currentUser;
 
@@ -34,7 +34,7 @@ feedbackForm.addEventListener('submit', async (event) => {
         title,
         description,
         attachment: attachment ? attachment.name : null, // Store file name or null if no file
-        category,
+        type,
         college,
         student: user.uid, // Use the UID of the logged-in user
         status: 'Pending', // Default status when submitted

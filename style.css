@@ -269,16 +269,16 @@ form * {
     background-color: #0b1129;
 }
 
-.category-college {
+.type-college {
     display:flex;
     flex-wrap: wrap;
 }
 
-.category-college > :nth-child(1) {
+.type-college > :nth-child(1) {
     flex-basis: 40%
 }
 
-.category-college > :nth-child(2) {
+.type-college > :nth-child(2) {
     flex-basis: 60%;
 }
 
@@ -349,7 +349,7 @@ form * {
     grid-column:1/2;
 }
 
-.inbox-category-column {
+.inbox-type-column {
     grid-column: 2/3;
 }
 .inbox-status-column {
@@ -385,7 +385,7 @@ form * {
     flex: auto;
 }
 
-.inbox-category {
+.inbox-type {
     grid-column: 2/3;
 }
 

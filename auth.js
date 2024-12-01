@@ -4,8 +4,8 @@ import { ref, get } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-dat
 
 // Get the login form elements
 const loginButton = document.querySelector('.login-btn');
-const emailInput = document.querySelector('#email');
-const passwordInput = document.querySelector('#password');
+const emailInput = document.querySelector('#login-email');
+const passwordInput = document.querySelector('#login-password');
 
 // Get the expected role based on the page
 const isStudentLogin = window.location.pathname.includes('login-stu');

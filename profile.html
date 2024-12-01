@@ -8,25 +8,28 @@
 </head>
 <body>
     <header class="header">
-        <a href="#"><p>FEEDBACK LOG</p></a>
+        <a href="#" id="home-link"><p>HOME</p></a>
         <a href="./profile.html"><p>PROFILE</p></a>
         <a href="#"><p>LOG OUT</p></a>
     </header>
     
     <div class="profile-container">
         <div class="pfp-container">
-            <img src="./pics/pfp-none.jpg" class="pfp">
+            <img src="./pics/pfp-none.jpg" class="pfp" alt="Profile Picture">
         </div>
         <div class="txt-container">
-            <h1 class="username">User Name</h1>
+            <h1 class="username" id="name">User Name</h1>
             <hr>
-            <h6 class="user-status">Student</h6>
-            <h6 class="school-num">202412345</h6>
-            <p class="pfp-details">College of Information and Computer Science</p>
-            <p class="pfp-details pfp-details-end">DLSUD1234@dlsud.edu.ph</p>
+            <h6 class="user-status" id="role">Role</h6>
+            <h6 class="school-num" id="idnumber">ID Number</h6>
+            <p class="pfp-details" id="college">College</p>
+            <p class="pfp-details pfp-details-end" id="email">Email</p>
         </div>
     </div>
 
     <div class="box-thingy"></div>
+
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="profile.js"></script>
 </body>
 </html>

@@ -114,12 +114,12 @@ input[type="text"] {
     display: flex;
     justify-content: space-between;
 }
-.login-txt, #email, #password,
+.login-txt, #login-email, #login-password,
 .login-btn, .admin-btn {
     margin-bottom: 12px;
 }
 
-#email, #password {
+#login-email, #login-password {
     padding: 12px;
     background-color: #f2f2f2;
     border: none;

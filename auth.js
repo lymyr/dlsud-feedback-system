@@ -33,7 +33,7 @@ loginButton.addEventListener('click', async (event) => {
             // Check if the user's role matches the expected role for the page
             if (userRole === expectedRole) {
                 // Redirect based on user role
-                window.location.href = userRole === 'Student' ? 'feedback-form.html' : 'feedback-log.html';
+                window.location.href = userRole === 'Student' ? 'dashboard-stu.html' : 'dashboard-admin.html';
             } else {
                 alert(`Invalid account. This page is for ${expectedRole} login only.`);
             }

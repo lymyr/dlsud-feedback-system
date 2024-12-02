@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <title>Student Feedback Log</title>
 </head>
 <body>
@@ -14,58 +15,84 @@
     </header>
 
     <div class="feedback-log-container">
-        <div class="log-left">
-            <div class="log-selectables"><img src="/icons/pencil.svg"><p>Write Feedback</p></div>
-            <div class="log-selectables"><img src="/icons/inbox.svg"><p>All Feedback</p></div>
-            <div class="log-selectables"><img src="/icons/star.svg"><p>Starred</p></div>
-            <div class="log-selectables"><img src="/icons/trash.svg"><p>Trash</p></div>
-            <div class="log-selectables"><img src="/icons/pending.svg"><p>Pending</p></div>
-            <div class="log-selectables"><img src="/icons/ongoing.svg"><p>Ongoing</p></div>
-            <div class="log-selectables"><img src="/icons/resolved.svg"><p>Resolved</p></div>
-        </div>
+        <aside class="sidebar">
+            <div class="sidebar-options">
+                <div class="sidebar-option">
+                    <button class="write-feedback-btn">
+                        <span>Write Feedback</span>
+                    </button>
+                </div>
+                <div class="sidebar-option"><p>All Feedback</p></div>
+                <div class="sidebar-option"><p>Starred</p></div>
+                <div class="sidebar-option"><p>Trash</p></div>
+                <div class="sidebar-option"><p>Pending</p></div>
+                <div class="sidebar-option"><p>Ongoing</p></div>
+                <div class="sidebar-option"><p>Resolved</p></div>
+            </div>
+        </aside>
 
-        <div class="log-right">
-            <div class="feedback-header">
-                <span class="inbox-title-column">Feedback</span>
-                <span class="inbox-category-column">Category</span>
-                <span class="inbox-status-column">Status</span>
-                <span class="inbox-date-column">Date Submitted</span>
-            </div>
-            <div class="feedback-item">
-                <div class="feedback-item-section">
-                    <span class="inbox-icon"><img src="/icons/star.svg"></span>
-                    <span class="inbox-office">AAA</span>
-                    <span class="inbox-seperator">-</span>
-                    <span class="inbox-title"> dolorum, reprehenderit fugiat, voluptate vel beatae itaque mollitia debitis et autem doloribus quis, impedit fuga voluptatibus..</span>
-                </div>
-                <span class="inbox-category">Suggestion</span>
-                <span class="inbox-status">Resolved</span>
-                <span class="inbox-date">00/00/0000</span>
-            </div>
+        <main class="feedback-log">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="feedback-starred"></th>
+                        <th class="feedback-title">Feedback</th>
+                        <th class="feedback-category">Category</th>
+                        <th class="feedback-status">Status</th>
+                        <th class="feedback-date">Date Submitted</th>
+                    </tr>
+                </thead>
+                <tbody id="feedback-items">
+                    <!-- Dynamic feedback items will be added here -->
+                </tbody>
+            </table>
+        </main>
+        
+        <script>
+            // Static example feedback data
+            const feedbackData = [
+                { text: "Make Monday to Friday holidays so we can enjoy life", category: "Suggestion", status: "Pending", date: "June 9, 2024" },
+                { text: "Improve the Wi-Fi in the library for better student experience", category: "Concern", status: "Ongoing", date: "October 1, 2024" },
+                { text: "Reduce the tuition fees as it is too expensive", category: "Suggestion", status: "Resolved", date: "November 1, 2024" },
+                { text: "Introduce more courses on Artificial Intelligence", category: "Suggestion", status: "Pending", date: "September 20, 2024" },
+                { text: "Introduce more courses on Artificial Intelligence", category: "Suggestion", status: "Pending", date: "September 20, 2024" },
+            ];
+        
+            // Function to render a feedback item with status color
+            function renderFeedbackItem(feedback, index) {
+                const feedbackRow = document.createElement('tr'); // Create a table row
+        
+                // Define the color classes based on status
+                const statusClasses = {
+                    "Pending": "pending",
+                    "Ongoing": "ongoing",
+                    "Resolved": "resolved"
+                };
+        
+                const statusClass = statusClasses[feedback.status] || "pending";  // Default to pending if status is unknown
+        
+                feedbackRow.innerHTML = `
+                    <td class="feedback-starred">
+                        <i class="fas fa-star ${feedback.starred ? 'starred' : 'unstarred'}" onclick="toggleStar(${index})"></i>
+                    </td>
+                    <td class="feedback-text">${feedback.text.length > 50 ? feedback.text.slice(0, 50) + "..." : feedback.text}</td>
+                    <td class="feedback-category">${feedback.category}</td>
+                    <td class="feedback-status"><div class="status-background ${statusClass}">${feedback.status}</div></td>
+                    <td class="feedback-date">${feedback.date}</td>
+                `;
+        
+                document.getElementById('feedback-items').appendChild(feedbackRow);
+            }
+            
+            function toggleStar(index) {
+                feedbackData[index].starred = !feedbackData[index].starred;
+                document.getElementById('feedback-items').innerHTML = ''; // Clear the table before re-rendering
+                feedbackData.forEach(renderFeedbackItem);
+            }
 
-            <div class="feedback-item">
-                <div class="feedback-item-section">
-                    <span class="inbox-icon"><img src="/icons/star.svg"></span>
-                    <span class="inbox-office">AAA</span>
-                    <span class="inbox-seperator">-</span>
-                    <span class="inbox-title"> dolorum, reprehenderit fugiat, voluptate vel beatae itaque mollitia debitis et autem doloribus quis, impedit fuga voluptatibus..</span>
-                </div>
-                <span class="inbox-category">Suggestion</span>
-                <span class="inbox-status test">Pending</span>
-                <span class="inbox-date">00/00/0000</span>
-            </div>
-            <div class="feedback-item">
-                <div class="feedback-item-section">
-                    <span class="inbox-icon"><img src="/icons/star.svg"></span>
-                    <span class="inbox-office">AAA</span>
-                    <span class="inbox-seperator">-</span>
-                    <span class="inbox-title"> dolorum, reprehenderit fugiat, voluptate vel beatae itaque mollitia debitis et autem doloribus quis, impedit fuga voluptatibus..</span>
-                </div>
-                <span class="inbox-category">Concern</span>
-                <span class="inbox-status test2">Ongoing</span>
-                <span class="inbox-date">00/00/0000</span>
-            </div>
-        </div>
+            // Loop through static data
+            feedbackData.forEach(renderFeedbackItem);
+        </script>        
     </div>
 </body>
 </html>

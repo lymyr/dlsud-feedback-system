@@ -283,137 +283,142 @@ form * {
 }
 
 
-/* stu-feedback-log.html */
+/* feedback-log-stu.html */
 .feedback-log-container {
-    display:flex;
-    /* background-color: #e5ffe7; */
+    display: flex;
+    width: 100%;
+    height: 927px;
 }
 
-.feedback-log-container > * {
-    padding:16px;
+.sidebar {
+    width: 301px;
+    height: 927px;
+    background-color: #f8f8f8;
+    overflow-y: auto;
 }
 
-.log-left {
-    max-width: fit-content;
-    border-style: none solid none none;
-    border-width: 1px;
-    border-color: rgb(157, 157, 157);
+.sidebar-options {
+    display: flex;
+    flex-direction: column;
 }
 
-.log-left > * {
-    gap:12px;
-    margin-bottom:20px;
+.sidebar-option {
+    padding: 15px;
+    cursor: pointer;
 }
 
-.log-left > :nth-child(1) {
-    margin-bottom:32px;
-    border-radius: 12px;
-    border-style: solid;
-    border-width: 1px;
-    padding:12px;
+.write-feedback-btn {
+    background-color: #00A357;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
 }
 
-.log-selectables {
-    display:flex;
-    text-wrap:nowrap;
+.feedback-log {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-x: auto;
+    max-width: 1139px;
+    height: 927px;
 }
 
-.log-right {
-    flex-basis:100%;
+table {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    table-layout: fixed;
 }
 
-.log-right span {
-    margin:auto;
-}
-
-.feedback-item,
-.feedback-header {
-    display:grid;
-    grid-template-columns: 70% 1fr 1fr 1fr;
-    min-width: fit-content;
-}
-
-.feedback-header {
-    border-bottom: 1px solid rgb(92, 92, 92);
+th {
+    background-color: #ffffff;
+    font-family: 'Hammersmith One', sans-serif;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 2px solid #ccc;
 }
 
 
+td {
+    font-family: 'Montserrat', sans-serif;
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
 
-.feedback-item > *,
-.feedback-header > * {
-    margin: 4px;
+.feedback-title, .feedback-category, .feedback-status, .feedback-date {
+    width: 20%;
+}
+
+.starred-column {
+    width: 10%;
     text-align: center;
 }
 
-.inbox-title-column {
-    grid-column:1/2;
+.feedback-star {
+    cursor: pointer;
+    text-align: center;
 }
 
-.inbox-type-column {
-    grid-column: 2/3;
-}
-.inbox-status-column {
-    grid-column: 3/4;
-}
-.inbox-date-column {
-    grid-column: 4/5;
-    text-wrap: nowrap;
+.star-icon {
+    pointer-events: auto;
+    width: 24px;
+    height: 24px;
 }
 
-.feedback-item-section {
-    grid-column: 1/2;
-    display:flex;
+
+.feedback-status .status-background.pending {
+    background-color: rgba(251, 221, 143, 1); /* Yellow for Pending */
 }
 
-.inbox-icon,
-.inbox-office,
-.inbox-seperator {
-    flex-basis:5%;
-    padding-right: 8px;
+.feedback-status .status-background.ongoing {
+    background-color: rgba(104, 168, 235, 1); /* Blue for Ongoing */
 }
 
-.inbox-title {
+.feedback-status .status-background.resolved {
+    background-color: rgba(119, 233, 194, 1); /* Green for Resolved */
+}
+
+td.feedback-status .status-background {
+    border-radius: 10px;
+    text-align: center;
+    vertical-align: middle;
+    color: #000;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.2px;
+    padding: 8px 16px;
+    display: inline-block;
+}
+
+.feedback-text {
+    max-width: 200px; /* Limit max width of feedback text */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    text-align: left;
-    flex-basis: 85%;
-
-    /*idk kung anong pinaglalagay ko dito, nag ooverflow kasi aaaaaa*/
-    min-width: 85%;
-    max-width: 0;
-    flex: auto;
 }
 
-.inbox-type {
-    grid-column: 2/3;
+.feedback-star {
+    width: 5%;
+    cursor: pointer;
+    text-align: center;
 }
 
-.inbox-status {
-    grid-column: 3/4;
-    background-color: #77E9C2;
-    padding:6px;
-    border-radius: 12px;
+.starred {
+    color: #F1A64F; 
 }
 
-.inbox-date {
-    grid-column: 4/5;
-}
-
-.feedback-header {
-    padding-bottom: 8px;
-    margin-bottom: 6px;
-}
-.feedback-item {
-    margin: 6px 0px 6px 0px
-}
-
-.test {
-    background-color: #FBDD8F;
-}
-
-.test2 {
-    background-color: #68A8EB;
+.unstarred {
+    color: #D1D5DB;
+    cursor: pointer;
 }
 
 

@@ -61,12 +61,12 @@
                 { text: "Reduce the tuition fees as it is too expensive", category: "Suggestion", status: "Resolved", date: "November 1, 2024" },
                 { text: "Introduce more courses on Artificial Intelligence", category: "Suggestion", status: "Pending", date: "September 20, 2024" }
             ];
+            
+            // status color
+            function renderFeedback(feedback, index) {
+                const feedbackRow = document.createElement('tr'); // creates a table row
         
-            // Function to render a feedback item with status color
-            function renderFeedbackItem(feedback, index) {
-                const feedbackRow = document.createElement('tr'); // Create a table row
-        
-                // Define the color classes based on status
+                // color classes based on status
                 const statusClasses = {
                     "Pending": "pending",
                     "Ongoing": "ongoing",
@@ -84,38 +84,19 @@
                     <td class="feedback-status"><div class="status-background ${statusClass}">${feedback.status}</div></td>
                     <td class="feedback-date">${feedback.date}</td>
                 `;
-                
-                // Add click event to the row to show the full feedback content
-                feedbackRow.onclick = function() {
-                    showFeedbackContent(feedback);
-                };
 
                 document.getElementById('feedback-items').appendChild(feedbackRow);
             }
-            
-            function showFeedbackContent(feedback) {
-                const feedbackContent = `
-                    <h2>Feedback Details</h2>
-                    <p><strong>Category:</strong> ${feedback.category}</p>
-                    <p><strong>Status:</strong> ${feedback.status}</p>
-                    <p><strong>Date Submitted:</strong> ${feedback.date}</p>
-                    <p><strong>Content:</strong> ${feedback.text}</p>
-                `;
-                
-                // Replace the table with the full feedback content
-                const feedbackLog = document.querySelector('.feedback-log');
-                feedbackLog.innerHTML = feedbackContent;
-            } 
 
             function toggleStar(index, event) {
                 event.stopPropagation();  // Prevent row click event
                 feedbackData[index].starred = !feedbackData[index].starred;
                 document.getElementById('feedback-items').innerHTML = '';
-                feedbackData.forEach(renderFeedbackItem);
+                feedbackData.forEach(renderFeedback);
             }
 
-            // Loop through static data
-            feedbackData.forEach(renderFeedbackItem);
+            // Loop through sample data
+            feedbackData.forEach(renderFeedback);
         </script>        
     </div>
 </body>

@@ -34,7 +34,7 @@ feedbackForm.addEventListener('submit', async (event) => {
         title,
         description,
         attachment: attachment ? attachment.name : null, // Store file name or null if no file
-        category,
+        type,
         college,
         student: user.uid, // Use the UID of the logged-in user
         status: 'Pending', // Default status when submitted

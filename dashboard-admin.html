@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Admin Dashboard</title>
-    <script type="module" src="./fetch-feedback.js"></script> <!-- Include fetch-feedback.js -->
+    <script type="module" src="./dashboard.js"></script>
 </head>
 <body>
     <div class="dashboard-admin-landing">
         <header class="header header-dashboard">
-            <a href="#"><p>FEEDBACK LOG</p></a>
+            <a href="./feedback-log-admin.html"><p>FEEDBACK LOG</p></a>
             <a href="./profile.html"><p>PROFILE</p></a>
-            <a href="#"><p>LOG OUT</p></a>
+            <a href="#" id="logout-link"><p>LOG OUT</p></a>
         </header>
         <div class="dashboard-admin-content">
             <h1>ADMIN DASHBOARD</h1>
@@ -67,5 +67,6 @@
             </div>
         </div>
     </div>
+    <script type="module" src="auth.js"></script>
 </body>
 </html>

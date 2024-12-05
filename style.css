@@ -54,10 +54,17 @@ p, span {
     justify-content: end;
     position: sticky;
     top:0;
+    transition: 0.2s;
 }
 
 .header > * {
     color:white;
+}
+
+.header > *:hover {
+    text-shadow: 2px 4px 4.3px rgba(0, 0, 0, 0.15);
+    letter-spacing: 0px;
+    color:rgba(255, 255, 255, 0.89);
 }
 
 /* dashboard */
@@ -66,9 +73,14 @@ p, span {
 }
 
 .header p {
-    margin:24px 42px 24px 42px;
+    margin:24px 42px;
     text-wrap: nowrap;
 }
+
+.header > a {
+    width:fit-content;
+}
+
 input[type="text"] {
     font-size: 20px;
 }
@@ -114,7 +126,17 @@ input[type="text"] {
     display: flex;
     justify-content: space-between;
 }
-.login-txt, #login-email, #login-password,
+
+.btn-container > button {
+    cursor:pointer;
+    transition: 0.2s;
+}
+
+.btn-container > button:hover {
+    cursor:pointer;
+}
+
+.login-txt, #email, #password,
 .login-btn, .admin-btn {
     margin-bottom: 12px;
 }
@@ -138,8 +160,11 @@ input[type="text"] {
 
 .login-btn {
     background-color: #F1A64F;
+    transition: 0.2s;
 }
-
+.login-btn:hover {
+    background-color: #ffd4a3;
+}
 .login-icon {
     width: 236px;
     height: 236px;
@@ -152,14 +177,21 @@ input[type="text"] {
 }
 .admin-btn {
     background-color: #3A436A;
+    transition: 0.2s;
 }
-
+.admin-btn:hover {
+    background-color: #6976b2;
+}
 /* login-admin.html */
 .login-admin-body {
     background-color: var(--accent2);
 }
 .stu-btn {
     background-color: var(--accent);
+    transition: 0.2s;
+}
+.stu-btn:hover {
+    background-color: #a3d4bd;
 }
 
 
@@ -255,6 +287,13 @@ form * {
     letter-spacing: 7.2px;
     padding: 24px 54px 24px 54px;
     width: fit-content;
+    transition: 0.2s;
+}
+
+.feedback-submit:hover {
+    background-color: #44656f;
+    letter-spacing: 7px;
+    cursor: pointer;
 }
 .submit-container {
     align-items: center;
@@ -281,7 +320,12 @@ form * {
 .type-college > :nth-child(2) {
     flex-basis: 60%;
 }
-
+.update-feedback-preview {
+    padding:42px;
+    margin-bottom:42px;
+    background-color: white;
+    border-radius: 8px;
+}
 
 /* stu-feedback-log.html */
 .feedback-log-container {
@@ -459,6 +503,11 @@ form * {
     margin-top: 64px;
     text-shadow: 0px 0px 0px;
     text-decoration: none;
+    transition: 0.5s;
+}
+
+.dashboard-stu-btn:hover {
+    background-color: #ffcf95;
 }
 
 .stu-feedback-status-container {
@@ -494,8 +543,13 @@ form * {
     border-radius: 22px;
     color:black;
     align-content: center;
+    transition: 0.5s;
 }
 
+.stu-feedback-status:hover {
+    background-color: white;
+    cursor: default;
+}
 
 .status-review {
     background-color: #FBDD8F;
@@ -528,16 +582,23 @@ form * {
     justify-content: space-between;
     padding:48px;
     align-items: center;
+    transition: 0.7s;
+}
+
+.guidelines-item:hover {
+    opacity: 75%;
 }
 
 .guidelines-item > :nth-child(1) {
     min-width: 256px;
     text-align: left;
+    cursor:default;
 }
 
 .guidelines-item > :nth-child(2) {
     font-size: 54px;
     margin-right: 64px;
+    cursor: default;
 }
 
 .guidelines-item > :nth-child(3) {
@@ -656,6 +717,11 @@ form * {
     box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.50);
     font-size: 20px;
     letter-spacing: 0.8px;
+    transition: 0.2s;
+}
+
+.dashboard-admin-btn:hover {
+    background-color: #b0cff7;
 }
 
 .metrics-container > h6 {
@@ -669,6 +735,13 @@ form * {
     justify-content: space-between;
     height:320px;
     text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.3);
+    transition: 1s;
+}
+
+.metrics-box-container>*:hover {
+    font-size: larger;
+    opacity: 20%;
+    cursor:default;
 }
 
 .metrics-box {

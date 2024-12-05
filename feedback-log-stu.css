@@ -1,0 +1,324 @@
+/* feedback-log-stu.html */
+.feedback-log-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 301px;
+  height: 100vh;
+  background-color: #ffffff;
+  border-right: 2px solid #e8e8e8b9;
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  box-sizing: border-box;
+}
+
+.sidebar-options {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+}
+
+.sidebar-option {
+  padding: 10px 20px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.write-feedback-btn {
+  display: flex;
+  font-size: 18px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  background-color: white;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.write-feedback-btn i {
+  margin-right: 15px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 40px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  border-radius: 15px;
+  margin-left:20px;
+  margin-right:20px;
+}
+
+.menu-item i {
+  margin-right: 10px;
+}
+
+.menu-item:hover {
+  background-color: #f0f0f0;
+  border-radius: 15px;
+}
+
+.menu-item.active {
+  margin-left:20px;
+  margin-right:20px;
+  background-color: var(--accent);
+  color: white;
+  border-radius: 8px;
+}
+
+.menu-item.active i {
+  color: white;
+}
+
+.status-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.status-dot.pending {
+  background-color: rgba(251, 221, 143, 1);
+}
+
+.status-dot.ongoing {
+  background-color: rgba(104, 168, 235, 1);
+}
+
+.status-dot.resolved {
+  background-color: rgba(119, 233, 194, 1);
+}
+
+.feedback-log {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-x: auto;
+  height: 927px;
+}
+
+table {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+th, td{
+  border: 1px solid #e3e3e3
+}
+
+th {
+  background-color: #ffffff;
+  font-family: 'Hammersmith One', sans-serif;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 2px solid #ccc;
+}
+
+td {
+  font-family: 'Montserrat', sans-serif;
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.feedback-title, .feedback-type, .feedback-status, .feedback-date {
+  width: 20%;
+}
+
+.feedback-title, .feedback-text{
+  text-align: left;
+}
+
+.feedback-status .status-background.pending {
+  background-color: rgba(251, 221, 143, 1); /* Yellow for Pending */
+}
+
+.feedback-status .status-background.ongoing {
+  background-color: rgba(104, 168, 235, 1); /* Blue for Ongoing */
+}
+
+.feedback-status .status-background.resolved {
+  background-color: rgba(119, 233, 194, 1); /* Green for Resolved */
+}
+
+td.feedback-status .status-background {
+  border-radius: 10px;
+  text-align: center;
+  vertical-align: middle;
+  color: #000;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.2px;
+  padding: 8px 16px;
+  display: inline-block;
+}
+
+.feedback-text {
+  max-width: 100%; /* Limit max width of feedback text */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.feedback-hidden {
+  display:none;
+}
+
+.feedback-content-container {
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: none;
+  position: absolute;
+}
+
+.header-content {
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+}
+
+.header-content .left-icons{
+  margin-right: 15px;
+  color: #888;
+  border-right: 2px solid #ccc;
+  padding-right: 15;
+}
+
+.header-content .left-icons i{
+  padding: 10px;
+  font-size: 18px;
+}
+
+.header-content .status {
+  display: flex;
+  align-items: center;
+  border-right: 2px solid #ccc;
+  border-left: 2px solid #ccc;
+  margin-left: auto;
+  padding: 8px 20px;
+}
+
+.header-content .status .header-type {
+  margin-right: 20px;
+  font-size: 20px;
+  color: #000000;
+  border-right: 1px solid #ccc;
+  padding: 8px 20px;
+}
+
+.header-content .status .status-badge.pending {
+  background-color: rgba(251, 221, 143, 1); /* Yellow for Pending */
+}
+
+.header-content .status .status-badge.ongoing {
+  background-color: rgba(104, 168, 235, 1); /* Blue for Ongoing */
+}
+
+.header-content .status .status-badge.resolved {
+  background-color: rgba(119, 233, 194, 1); /* Green for Resolved */
+}
+
+.header-content .status .status-badge {
+  color: #000000;
+  padding: 5px 15px;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.header-content .date {
+  font-size: 20px;
+  color: #000000;
+  padding: 5px 15px;
+}
+
+.feedback-content {
+      margin-bottom: 40px;
+      font-family: 'Montserrat', sans-serif;
+}
+
+.feedback-content .to {
+  font-size: 14px;
+  font-style: normal;
+  color: #888;
+  margin-bottom: 5px;
+}
+.feedback-content .from {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.from .name {
+  font-weight: 600;
+}
+
+.from .email {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.feedback-content .subject {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.feedback-content .body {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.6;
+}
+
+.status-update {
+  border-top: 1px solid #ccc;
+  margin-top: 20px;
+  padding-top: 30px;
+  margin-bottom: 40px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.status-update .status-title {
+  font-size: 14px;
+  font-weight: 700;
+  font-style: normal;
+  color: #00a357;
+  margin-bottom: 5px;
+}
+
+.status-update .status-from {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.status-update .status-body {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.6;
+}

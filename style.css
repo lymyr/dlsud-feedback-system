@@ -330,6 +330,10 @@ table {
     table-layout: fixed;
 }
 
+th, td{
+    border: 1px solid #e3e3e3
+}
+
 th {
     background-color: #ffffff;
     font-family: 'Hammersmith One', sans-serif;
@@ -354,6 +358,10 @@ td {
 
 .feedback-title, .feedback-category, .feedback-status, .feedback-date {
     width: 20%;
+}
+
+.feedback-title{
+    text-align: left;
 }
 
 .feedback-status .status-background.pending {
@@ -409,48 +417,83 @@ td.feedback-status .status-background {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 10px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 12px;
     margin-bottom: 20px;
 }
-.header-content .left-icons i, .header-content .right-icons i {
-    margin-right: 10px;
+
+.header-content .left-icons{
+    margin-right: 15px;
     color: #888;
+    border-right: 2px solid #ccc;
+    padding-right: 15;
 }
 
 .header-content .left-icons i{
-    margin: 20px;
+    padding: 10px;
+    font-size: 18px;
 }
 
 .header-content .status {
     display: flex;
-    padding: 5px;
     align-items: center;
+    border-right: 2px solid #ccc;
+    border-left: 2px solid #ccc;
+    margin-left: auto;
+    padding: 8px 20px;
 }
 
-.header-content .status .status-text {
-    margin-right: 10px;
-    font-size: 16px;
+.header-content .status .header-category {
+    margin-right: 20px;
+    font-size: 20px;
     color: #000000;
+    border-right: 1px solid #ccc;
+    padding: 8px 20px;
+}
+
+.header-content .status .status-badge.pending {
+    background-color: rgba(251, 221, 143, 1); /* Yellow for Pending */
+}
+
+.header-content .status .status-badge.ongoing {
+    background-color: rgba(104, 168, 235, 1); /* Blue for Ongoing */
+}
+
+.header-content .status .status-badge.resolved {
+    background-color: rgba(119, 233, 194, 1); /* Green for Resolved */
 }
 
 .header-content .status .status-badge {
-    background-color: #28a745;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 14px;
+    color: #000000;
+    padding: 5px 15px;
+    border-radius: 10px;
+    font-size: 20px;
 }
 
+.feedback-status .status-badge.status-background.pending {
+    background-color: rgba(251, 221, 143, 1); /* Yellow for Pending */
+}
+
+.feedback-status .status-badge.status-background.ongoing {
+    background-color: rgba(104, 168, 235, 1); /* Blue for Ongoing */
+}
+
+.feedback-status .status-badge.status-background.resolved {
+    background-color: rgba(119, 233, 194, 1); /* Green for Resolved */
+}
+
+
 .header-content .date {
-    font-size: 14px;
+    font-size: 20px;
     color: #000000;
+    padding: 5px 15px;
 }
 
 .feedback-content {
         margin-bottom: 40px;
         font-family: 'Montserrat', sans-serif;
-    }
+}
+
 .feedback-content .to {
     font-size: 14px;
     font-style: normal;
@@ -466,6 +509,7 @@ td.feedback-status .status-background {
 .from .name {
     font-weight: 600;
 }
+
 .from .email {
     font-size: 14px;
     font-weight: 400;
@@ -484,27 +528,32 @@ td.feedback-status .status-background {
 }
 
 .status-update {
-    border-top: 1px solid #e0e0e0;
-    padding-top: 10px;
+    border-top: 1px solid #ccc;
     margin-top: 20px;
+    padding-top: 30px;
+    margin-bottom: 40px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .status-update .status-title {
     font-size: 14px;
-    color: #888;
+    font-weight: 700;
+    font-style: normal;
+    color: #00a357;
     margin-bottom: 5px;
 }
+
 .status-update .status-from {
     font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 10px;
+    font-weight: 600;
+    margin-bottom: 30px;
 }
+
 .status-update .status-body {
     font-size: 14px;
     color: #333;
     line-height: 1.6;
 }
-
 
 
 

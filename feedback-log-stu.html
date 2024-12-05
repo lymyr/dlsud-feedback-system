@@ -51,7 +51,7 @@
                         <i class="fas fa-arrow-left" onclick="goBack()"></i>
                     </div>
                     <div class="status">
-                        <span class="status-text"></span>
+                        <span class="header-category"></span>
                         <span class="status-badge"></span>
                     </div>
                     <div class="date"></div>
@@ -69,26 +69,42 @@
         <script>
             // Static example feedback data
             const feedbackData = [
-                { text: "Make Monday to Friday holidays so we can enjoy life", category: "Suggestion", status: "Pending", date: "June 9, 2024", to:"Collegiate Office", from: "Charles Smith Gamilla &lt;ace0369@dlsud.edu.ph&gt;",
+                { text: "Make Monday to Friday holidays so we can enjoy life", category: "Suggestion", status: "Ongoing", date: "June 9, 2024", to:"Collegiate Office", from: "Charles Smith Gamilla &lt;ace0369@dlsud.edu.ph&gt;",
                     body: "The amber droplet hung from the branch, reaching fullness and ready to drop. It waited. While many of the other droplets were satisfied to form as big as they could and release, this droplet had other plans. It wanted to be part of history. It wanted to be remembered long after all the other droplets had dissolved into history. So it waited for the perfect specimen to fly by to trap and capture that it hoped would eventually be discovered hundreds of years in the future.",
                     updates: [
-                        { title: "Status Update - Ongoing", body: "We are working on your suggestion." }
+                        { title: "Status Update - Ongoing", body: "We are working on your suggestion." },
+                        { title: "Status Update - Ongoing", body: "We are working on your suggestion." },
+                        { title: "Status Update - Ongoing", body: "We are working on your suggestion." },
+                        { title: "Status Update - Ongoing", body: "We are working on your suggestion." },
                     ] },
-                { text: "Improve the Wi-Fi in the library for better student experience", category: "Concern", status: "Ongoing", date: "October 1, 2024" },
-                { text: "Reduce the tuition fees as it is too expensive", category: "Suggestion", status: "Resolved", date: "November 1, 2024" },
-                { text: "Introduce more courses on Artificial Intelligence", category: "Suggestion", status: "Pending", date: "September 20, 2024" }
+                    { text: "Make Monday to Friday holidays so we can enjoy life", category: "Suggestion", status: "Pending", date: "June 9, 2024", to:"Collegiate Office", from: "Charles Smith Gamilla &lt;ace0369@dlsud.edu.ph&gt;",
+                    body: "The amber droplet hung from the branch, reaching fullness and ready to drop. It waited. While many of the other droplets were satisfied to form as big as they could and release, this droplet had other plans. It wanted to be part of history. It wanted to be remembered long after all the other droplets had dissolved into history. So it waited for the perfect specimen to fly by to trap and capture that it hoped would eventually be discovered hundreds of years in the future. The amber droplet hung from the branch, reaching fullness and ready to drop. It waited. While many of the other droplets were satisfied to form as big as they could and release, this droplet had other plans. It wanted to be part of history. It wanted to be remembered long after all the other droplets had dissolved into history. So it waited for the perfect specimen to fly by to trap and capture that it hoped would eventually be discovered hundreds of years in the future. The amber droplet hung from the branch, reaching fullness and ready to drop. It waited. While many of the other droplets were satisfied to form as big as they could and release, this droplet had other plans. It wanted to be part of history. It wanted to be remembered long after all the other droplets had dissolved into history. So it waited for the perfect specimen to fly by to trap and capture that it hoped would eventually be discovered hundreds of years in the future.",
+                    updates: [
+                        { title: "Status Update - Ongoing", body: "We are working on your suggestion. The amber droplet hung from the branch, reaching fullness and ready to drop. It waited. While many of the other droplets were satisfied to form as big as they could and release, this droplet had other plans. It wanted to be part of history. It wanted to be remembered long after all the other droplets had dissolved into history. So it waited for the perfect specimen to fly by to trap and capture that it hoped would eventually be discovered hundreds of years in the future." },
+                        { title: "Status Update - Ongoing", body: "We are working on your suggestion." },
+                        { title: "Status Update - Ongoing", body: "We are working on your suggestion." },
+                    ] },
+                    { text: "Make Monday to Friday holidays so we can enjoy life", category: "Suggestion", status: "Resolved", date: "June 9, 2024", to:"Collegiate Office", from: "Charles Smith Gamilla &lt;ace0369@dlsud.edu.ph&gt;",
+                    body: "The amber droplet hung from the branch, reaching fullness and ready to drop. It waited. While many of the other droplets were satisfied to form as big as they could and release, this droplet had other plans. It wanted to be part of history. It wanted to be remembered long after all the other droplets had dissolved into history. So it waited for the perfect specimen to fly by to trap and capture that it hoped would eventually be discovered hundreds of years in the future.",
+                    updates: [
+                        { title: "Status Update - Ongoing", body: "We are working on your suggestion." },
+                        { title: "Status Update - Resolved", body: "We are working on your suggestion." },
+                    ] },
             ];
             
+
+            // color classes based on status
+            const statusClasses = {
+                "Pending": "pending",
+                "Ongoing": "ongoing",
+                "Resolved": "resolved"
+            };
+
             // status color
+
+            // TABLE FEEDBACK LOG 
             function renderFeedback(feedback, index) {
-                const feedbackRow = document.createElement('tr'); // creates a table row
-        
-                // color classes based on status
-                const statusClasses = {
-                    "Pending": "pending",
-                    "Ongoing": "ongoing",
-                    "Resolved": "resolved"
-                };
+                const feedbackRow = document.createElement('tr'); // table row
         
                 const statusClass = statusClasses[feedback.status] || "pending";  // Default to pending
         
@@ -102,11 +118,17 @@
                 document.getElementById('feedback-items').appendChild(feedbackRow);
             }
             
+            // FEEDBACK VIEW
             function displayFeedback(index){
                 const feedback = feedbackData[index];
-                document.querySelector('.status-text').textContent = feedback.category;
-                document.querySelector('.status-badge').textContent = feedback.status;
-                document.querySelector('.status-badge').className = `status-badge ${feedback.status.toLowerCase()}`;
+                document.querySelector('.header-category').textContent = feedback.category;
+
+                const statusClass = statusClasses[feedback.status] || "pending";  // Default to pending
+                const statusText = document.querySelector('.status-badge');
+                statusText.textContent = feedback.status; 
+                statusText.className = `status-badge ${statusClass}`; 
+                //class="status-background ${statusClass}
+
                 document.querySelector('.date').textContent = feedback.date;
                 document.querySelector('.to').innerHTML = `To ${feedback.to || 'N/A'}`;
                 document.querySelector('.from').innerHTML = `<span class="name">${feedback.from.split('&lt;')[0]}</span> <span class="email">&lt;${feedback.from.split('&lt;')[1]}</span>`;
@@ -115,7 +137,11 @@
 
                 const updatesDiv = document.getElementById('status-updates');
                 updatesDiv.innerHTML = feedback.updates ? feedback.updates.map(update => `
-                    <div><strong>${update.title}</strong>: ${update.body}</div>
+                    <div class="status-update">
+                        <div class="status-title">${update.title}</div>
+                        <div class="status-from">${feedback.from}</div>
+                        <div class="status-body">${update.body}</div>
+                    </div>
                 `).join('') : '';
                 
                 document.getElementById('feedback-content-container').classList.remove('feedback-hidden');

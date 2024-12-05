@@ -328,6 +328,10 @@ form * {
 .type-college > :nth-child(2) {
     flex-basis: 60%;
 }
+
+/* feedback-log-stu.html in feedback-log-stu.css */
+
+/* feedback-update.html */
 .update-feedback-preview {
     padding:16px;
     margin-bottom:42px;
@@ -343,145 +347,6 @@ form * {
 }
 .update-feedback-preview > :nth-child(2) {
     font-size: 16px;
-}
-/* stu-feedback-log.html */
-.feedback-log-container {
-    display: flex;
-    width: 100%;
-    height: 927px;
-}
-
-.sidebar {
-    width: 301px;
-    height: 927px;
-    background-color: #f8f8f8;
-    overflow-y: auto;
-}
-
-.sidebar-options {
-    display: flex;
-    flex-direction: column;
-}
-
-.sidebar-option {
-    padding: 15px;
-    cursor: pointer;
-}
-
-.write-feedback-btn {
-    background-color: #00A357;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-}
-
-.feedback-log {
-    flex-grow: 1;
-    padding: 20px;
-    overflow-x: auto;
-    max-width: 1139px;
-    height: 927px;
-}
-
-table {
-    width: 100%;
-    border: 1px solid #ccc;
-    border-collapse: collapse;
-    table-layout: fixed;
-}
-
-th {
-    background-color: #ffffff;
-    font-family: 'Hammersmith One', sans-serif;
-    font-weight: bold;
-    padding: 10px;
-    text-align: center;
-    border-bottom: 2px solid #ccc;
-}
-
-
-td {
-    font-family: 'Montserrat', sans-serif;
-    padding: 10px;
-    border-bottom: 1px solid #e0e0e0;
-    text-align: center;
-    border-bottom: 1px solid #e0e0e0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    box-sizing: border-box;
-}
-
-.feedback-title, .feedback-category, .feedback-status, .feedback-date {
-    width: 20%;
-}
-
-.starred-column {
-    width: 10%;
-    text-align: center;
-}
-
-.feedback-star {
-    cursor: pointer;
-    text-align: center;
-}
-
-.star-icon {
-    pointer-events: auto;
-    width: 24px;
-    height: 24px;
-}
-
-
-.feedback-status .status-background.pending {
-    background-color: rgba(251, 221, 143, 1); /* Yellow for Pending */
-}
-
-.feedback-status .status-background.ongoing {
-    background-color: rgba(104, 168, 235, 1); /* Blue for Ongoing */
-}
-
-.feedback-status .status-background.resolved {
-    background-color: rgba(119, 233, 194, 1); /* Green for Resolved */
-}
-
-td.feedback-status .status-background {
-    border-radius: 10px;
-    text-align: center;
-    vertical-align: middle;
-    color: #000;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: -0.2px;
-    padding: 8px 16px;
-    display: inline-block;
-}
-
-.feedback-text {
-    max-width: 200px; /* Limit max width of feedback text */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.feedback-star {
-    width: 5%;
-    cursor: pointer;
-    text-align: center;
-}
-
-.starred {
-    color: #F1A64F; 
-}
-
-.unstarred {
-    color: #D1D5DB;
-    cursor: pointer;
-}
-
 
 /* dashboard-stu.html */
 .header-dashboard {

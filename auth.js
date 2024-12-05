@@ -62,12 +62,39 @@ if (studentButton) {
 }
 
 // LOG OUT FUNCTIONALITY
-const logoutLink= document.getElementById('logout-link');
+const logoutLink = document.getElementById('logout-link');
 
 if (logoutLink) {
     logoutLink.addEventListener('click', async (event) => {
         event.preventDefault();
-        await signOut(auth); // Log out the user
-        window.location.href = './login-stu.html'; // Redirect to login page
+
+        try {
+            const user = auth.currentUser;
+
+            if (user) {
+                // Check user role from Realtime Database before signing out
+                const userRef = ref(database, 'users/' + user.uid);
+                const snapshot = await get(userRef);
+
+                if (snapshot.exists()) {
+                    const userData = snapshot.val();
+                    const userRole = userData.role;
+
+                    // Log out the user
+                    await signOut(auth);
+
+                    // Redirect based on user role AFTER sign out
+                    if (userRole === 'Admin') {
+                        window.location.href = 'login-admin.html'; // Redirect to Admin login page
+                    } else {
+                        window.location.href = 'login-stu.html'; // Redirect to Student login page
+                    }
+                } else {
+                    console.error('User data not found in the database.');
+                }
+            }
+        } catch (error) {
+            console.error('Error during logout:', error);
+        }
     });
 }

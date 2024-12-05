@@ -10,7 +10,7 @@
     <header class="header">
         <a href="./dashboard-stu.html"><p>HOME</p></a>
         <a href="./profile.html"><p>PROFILE</p></a>
-        <a href="#"><p>LOG OUT</p></a>
+        <a href="#" id="logout-link"><p>LOG OUT</p></a>
     </header>
     <div class="form-landing-container">
         <img src="./pics/feedback-from-img-cropped.png">
@@ -55,7 +55,6 @@
                 <div class="feedback-section">
                     <label for="college" required>Relevant College</label>
                     <select name="college" id="college" required>
-                        <!-- idk proper value so nag based ako sa acronym. added "College of" if di abot ng 3 characters-->
                         <option disabled selected value>Select College</option>
                         <option value="College of Business Administration and Accountancy">Business Administration and Accountancy</option>
                         <option value="College of Criminal Justice Education">Criminal Justice Education</option>
@@ -72,6 +71,7 @@
             <div class="feedback-section submit-container"><input class="feedback-submit" type="submit" value="SUBMIT FEEDBACK"></div>
         </form>
     </div>
-    <script type="module" src="create-feedback.js"></script>
+    <script type="module" src="feedback-form.js"></script>
+    <script type="module" src="auth.js"></script>
 </body>
 </html>

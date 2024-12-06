@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="feedback-log.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <title>Student Feedback Log</title>
+    <title>Admin Feedback Log</title>
 </head>
 <body>
     <header class="header">
@@ -18,13 +18,6 @@
     <div class="feedback-log-container">
         <aside class="sidebar">
             <div class="sidebar-options">
-                <div class="sidebar-option">
-                    <button class="write-feedback-btn">
-                        <i><img src = "./icons/pencil.svg"></i>
-                        <span>Write Feedback</span>
-                    </button>
-                </div>
-
                 <div class="sidebar-option menu-item active" onclick="toggleActive(this)">
                     <i class="fas fa-inbox"></i>
                     <span>All Feedback</span>
@@ -82,8 +75,9 @@
                     <div class="from"></div>
                     <div class="subject"></div>
                     <div class="body"></div>
+                    <button class="admin-update-btn">Update</button>
                 </div>
-                <div id="status-updates"></div>
+                <div id="status-updates-admin"></div>
             </div>
         </main>
         
@@ -97,20 +91,7 @@
                         { title: "Status Update - Ongoing", body: "We are working on your suggestion." },
                         { title: "Status Update - Ongoing", body: "We are working on your suggestion." },
                         { title: "Status Update - Ongoing", body: "We are working on your suggestion." },
-                    ] },
-                    { text: "Make Monday to Friday holidays so we can enjoy life", type: "Suggestion", status: "Pending", date: "June 9, 2024", to:"Collegiate Office", from: "Charles Smith Gamilla &lt;ace0369@dlsud.edu.ph&gt;",
-                    body: "The amber droplet hung from the branch, reaching fullness and ready to drop. It waited. While many of the other droplets were satisfied to form as big as they could and release, this droplet had other plans. It wanted to be part of history. It wanted to be remembered long after all the other droplets had dissolved into history. So it waited for the perfect specimen to fly by to trap and capture that it hoped would eventually be discovered hundreds of years in the future. The amber droplet hung from the branch, reaching fullness and ready to drop. It waited. While many of the other droplets were satisfied to form as big as they could and release, this droplet had other plans. It wanted to be part of history. It wanted to be remembered long after all the other droplets had dissolved into history. So it waited for the perfect specimen to fly by to trap and capture that it hoped would eventually be discovered hundreds of years in the future. The amber droplet hung from the branch, reaching fullness and ready to drop. It waited. While many of the other droplets were satisfied to form as big as they could and release, this droplet had other plans. It wanted to be part of history. It wanted to be remembered long after all the other droplets had dissolved into history. So it waited for the perfect specimen to fly by to trap and capture that it hoped would eventually be discovered hundreds of years in the future.",
-                    updates: [
-                        { title: "Status Update - Ongoing", body: "We are working on your suggestion. The amber droplet hung from the branch, reaching fullness and ready to drop. It waited. While many of the other droplets were satisfied to form as big as they could and release, this droplet had other plans. It wanted to be part of history. It wanted to be remembered long after all the other droplets had dissolved into history. So it waited for the perfect specimen to fly by to trap and capture that it hoped would eventually be discovered hundreds of years in the future." },
-                        { title: "Status Update - Ongoing", body: "We are working on your suggestion." },
-                        { title: "Status Update - Ongoing", body: "We are working on your suggestion." },
-                    ] },
-                    { text: "Make Monday to Friday holidays so we can enjoy life", type: "Suggestion", status: "Resolved", date: "June 9, 2024", to:"Collegiate Office", from: "Charles Smith Gamilla &lt;ace0369@dlsud.edu.ph&gt;",
-                    body: "The amber droplet hung from the branch, reaching fullness and ready to drop. It waited. While many of the other droplets were satisfied to form as big as they could and release, this droplet had other plans. It wanted to be part of history. It wanted to be remembered long after all the other droplets had dissolved into history. So it waited for the perfect specimen to fly by to trap and capture that it hoped would eventually be discovered hundreds of years in the future.",
-                    updates: [
-                        { title: "Status Update - Ongoing", body: "We are working on your suggestion." },
-                        { title: "Status Update - Resolved", body: "We are working on your suggestion." },
-                    ] },
+                    ] }
             ];
             
             // color classes based on status
@@ -154,9 +135,9 @@
                 document.querySelector('.subject').textContent = feedback.text;
                 document.querySelector('.body').textContent = feedback.body;
 
-                const updatesDiv = document.getElementById('status-updates');
+                const updatesDiv = document.getElementById('status-updates-admin');
                 updatesDiv.innerHTML = feedback.updates ? feedback.updates.map(update => `
-                    <div class="status-update">
+                    <div class="status-update-admin">
                         <div class="status-title">${update.title}</div>
                         <div class="status-from">${feedback.from}</div>
                         <div class="status-body">${update.body}</div>

@@ -14,6 +14,7 @@
   flex-direction: column;
   font-size: 18px;
   box-sizing: border-box;
+  flex-shrink:0;
 }
 
 .sidebar-options {
@@ -40,11 +41,50 @@
   cursor: pointer;
   width: 100%;
   margin-bottom: 10px;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden; 
+  color: black;
+  z-index:1;
 }
 
 .write-feedback-btn i {
   margin-right: 15px;
 }
+
+.write-feedback-btn:hover {
+  background-color: #00A357;
+  border-color: #bbb; 
+  color:#ffffff
+}
+
+.write-feedback-btn i img {
+  width: 20px; 
+  height: 20px;
+  transition: filter 0.3s ease; 
+  filter: grayscale(0);
+}
+
+.write-feedback-btn:hover i img {
+  filter: invert(1) brightness(2);
+}
+
+.write-feedback-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: #00A357;
+  transition: all 0.4s ease;
+  z-index: -1;
+}
+
+.write-feedback-btn:hover::before {
+  left: 0;
+}
+
 
 .menu-item {
   display: flex;
@@ -52,9 +92,10 @@
   padding: 10px 40px;
   cursor: pointer;
   margin-bottom: 10px;
-  border-radius: 15px;
+  border-radius: 8px;
   margin-left:20px;
   margin-right:20px;
+  transition: all 0.1s ease;
 }
 
 .menu-item i {
@@ -62,8 +103,9 @@
 }
 
 .menu-item:hover {
-  background-color: #f0f0f0;
-  border-radius: 15px;
+  background-color: #00A357; 
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15); 
+  color: #ffffff;
 }
 
 .menu-item.active {
@@ -135,6 +177,12 @@ td {
   text-overflow: ellipsis;
   white-space: nowrap;
   box-sizing: border-box;
+}
+
+table tbody tr:hover {
+  background-color: #D5F9E4; 
+  cursor: pointer; 
+  transition: background-color 0.2s ease;
 }
 
 .feedback-title, .feedback-type, .feedback-status, .feedback-date {
@@ -321,4 +369,57 @@ td.feedback-status .status-background {
   font-size: 14px;
   color: #333;
   line-height: 1.6;
+}
+
+
+.status-update-admin {
+  border-top: 1px solid #ccc;
+  margin-top: 20px;
+  padding-top: 30px;
+  margin-bottom: 40px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.status-update-admin .status-title {
+  font-size: 14px;
+  font-weight: 700;
+  font-style: normal;
+  color: #00a357;
+  margin-bottom: 5px;
+}
+
+.status-update-admin .status-from {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.status-update-admin .status-body {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.6;
+}
+
+.admin-update-btn {
+  display: flex;
+  font-size: 18px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: 2px solid #00A357;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0);
+  color: #000000;
+  cursor: pointer;
+  width: 100px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.admin-update-btn:hover {
+  background-color: #00A357; 
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15); 
+  color: #ffffff;
 }

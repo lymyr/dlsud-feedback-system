@@ -41,9 +41,9 @@
   cursor: pointer;
   width: 100%;
   margin-bottom: 10px;
-  transition: all 0.4s ease; /* Adjust transition speed for swipe effect */
+  transition: all 0.4s ease;
   position: relative;
-  overflow: hidden; /* Ensures the swipe effect is contained within the button */
+  overflow: hidden; 
   color: black;
   z-index:1;
 }
@@ -406,7 +406,7 @@ td.feedback-status .status-background {
   align-items: center;
   justify-content: center;
   padding: 10px;
-  border: 2px solid #00A357; /* Light green border */
+  border: 2px solid #00A357;
   border-radius: 15px;
   background-color: rgba(255, 255, 255, 0);
   color: #000000;
@@ -415,7 +415,7 @@ td.feedback-status .status-background {
   margin-top: 20px;
   margin-bottom: 20px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease; /* Smooth transition effect */
+  transition: all 0.3s ease;
 }
 
 .admin-update-btn:hover {

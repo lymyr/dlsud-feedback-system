@@ -23,11 +23,11 @@
 }
 @font-face {
     font-family: pt-sans-caption;
-    src: url(.fonts/PT_Sans_Caption/PTSansCaption-Regular.ttf);
+    src: url('../fonts/PT_Sans_Caption/PTSansCaption-Regular.ttf');
 }
 @font-face {
     font-family: pt-sans-caption-bold;
-    src: url(.fonts/PT_Sans_Caption/PTSansCaption-Bold.ttf);
+    src: url('../fonts/PT_Sans_Caption/PTSansCaption-Bold.ttf');
     font-weight: bold;
 }
 
@@ -379,6 +379,7 @@ form * {
 
 .dashboard-stu-content > h6 {
     font-size: 24px;
+    color: #3C3C3C;
 }
 
 .dashboard-stu-btn {
@@ -420,6 +421,12 @@ form * {
 .stu-feedback-status > h1 {
     font-family: pt-sans-caption;
     font-size: 64px;
+    font-weight: bold;
+    color: #3C3C3C;
+}
+
+.stu-feedback-status > h6 {
+    color: #3C3C3C;
 }
 
 .stu-feedback-status {

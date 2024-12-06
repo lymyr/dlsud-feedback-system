@@ -13,13 +13,45 @@ auth.onAuthStateChanged(user => {
     if (user) {
         const uid = user.uid;
 
-        // Fetch the admin's college from the database
+        // Fetch the user's role and college from the database
         const userRef = ref(database, 'users/' + uid);
         onValue(userRef, (snapshot) => {
             const userData = snapshot.val();
+            const userRole = userData && userData.role ? userData.role : '';
             const userCollege = userData && userData.college ? userData.college : '';
 
-            // Fetch feedbacks and calculate counts
+            // Display the college icon and name (Admins only)
+            if (userRole === 'Admin') {
+                const adminTitleElement = document.querySelector('.dashboard-admin-title h1');
+                const adminIconElement = document.querySelector('.dashboard-admin-title img');
+
+                if (adminTitleElement && adminIconElement) {
+                    adminTitleElement.textContent = userCollege;
+
+                    // Set the appropriate college icon
+                    if (userCollege === 'College of Business Administration and Accountancy') {
+                        adminIconElement.src = './icons/icon-cbaa.svg';
+                    } else if (userCollege === 'College of Criminal Justice Education') {
+                        adminIconElement.src = './icons/icon-ccje.svg';
+                    } else if (userCollege === 'College of Education') {
+                        adminIconElement.src = './icons/icon-coed.svg';
+                    } else if (userCollege === 'College of Engineering, Architecture and Technology') {
+                        adminIconElement.src = './icons/icon-ceat.svg';
+                    } else if (userCollege === 'College of Information and Computer Studies') {
+                        adminIconElement.src = './icons/icon-cics.svg';
+                    } else if (userCollege === 'College of Liberal Arts and Communication') {
+                        adminIconElement.src = './icons/icon-clac.svg';
+                    } else if (userCollege === 'College of Tourism and Hospitality Management') {
+                        adminIconElement.src = './icons/icon-cthm.svg';
+                    } else if (userCollege === 'College of Science') {
+                        adminIconElement.src = './icons/icon-cos.svg';
+                    } else {
+                        adminIconElement.src = './icons/default-icon.svg'; // Default icon if no match
+                    }
+                }
+            }
+
+            // Student and Admin Feedback Count Functionality
             const feedbackRef = ref(database, 'feedbacks');
             onValue(feedbackRef, (snapshot) => {
                 const feedbacks = snapshot.val();

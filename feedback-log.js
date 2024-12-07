@@ -59,8 +59,8 @@ export function feedbackTable() {
     });
 }
 
-// Function to filter feedback based on status (sidebar options)
-function feedbackTableByStatus(statusFilter = null) {
+// Function to filter feedback based on status or date (sidebar options)
+function feedbackTableByStatus(statusFilter = null, dateFilter = null) {
     return new Promise((resolve, reject) => {
         auth.onAuthStateChanged((user) => {
             if (user) {
@@ -81,18 +81,19 @@ function feedbackTableByStatus(statusFilter = null) {
                             return;
                         }
 
-                        // Filter feedback based on role and status
+                        // Filter feedback based on role and status/date
                         const filteredFeedback = Object.keys(feedbacks).map((key) => ({
                             ...feedbacks[key],
-                            feedback_id: key // Store the feedback key/id here
+                            feedback_id: key // Store the feedback key/id
                         })).filter((feedback) => {
                             const matchesRole =
                                 userRole === 'Student'
                                     ? feedback.student === uid
                                     : feedback.college === userCollege;
                             const matchesStatus = !statusFilter || feedback.status === statusFilter;
+                            const matchesDate = !dateFilter || isDateInRange(feedback.dateTime, dateFilter);
 
-                            return matchesRole && matchesStatus;
+                            return matchesRole && matchesStatus && matchesDate;
                         });
 
                         resolve(filteredFeedback.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime)));
@@ -105,15 +106,50 @@ function feedbackTableByStatus(statusFilter = null) {
     });
 }
 
+// Helper function to check if a date is within the given range (for this week or this month)
+function isDateInRange(feedbackDateTime, dateFilter) {
+    const feedbackDate = new Date(feedbackDateTime);
+    const currentDate = new Date();
+
+    if (dateFilter === 'This Week') {
+        // Get the start of the current week (Sunday)
+        const startOfWeek = new Date(currentDate);
+        startOfWeek.setDate(currentDate.getDate() - currentDate.getDay());
+        startOfWeek.setHours(0, 0, 0, 0); // Set to midnight for exact comparison
+
+        // Get the end of the current week (Saturday)
+        const endOfWeek = new Date(startOfWeek);
+        endOfWeek.setDate(startOfWeek.getDate() + 6);
+        endOfWeek.setHours(23, 59, 59, 999); // End of the day for comparison
+
+        return feedbackDate >= startOfWeek && feedbackDate <= endOfWeek;
+    } else if (dateFilter === 'This Month') {
+        // Get the start of the current month
+        const startOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+        startOfMonth.setHours(0, 0, 0, 0);
+
+        // Get the end of the current month
+        const endOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+        endOfMonth.setHours(23, 59, 59, 999);
+
+        return feedbackDate >= startOfMonth && feedbackDate <= endOfMonth;
+    }
+
+    // Default return false if no specific filter is matched
+    return false;
+}
+
 // Add event listeners for sidebar options
 document.addEventListener('DOMContentLoaded', () => {
     const feedbackItems = document.getElementById('feedback-items');
 
     const sidebarOptions = {
-        "All Feedback": null,
-        "Pending": "Pending",
-        "Ongoing": "Ongoing",
-        "Resolved": "Resolved"
+        "All Feedback": { status: null, date: null },
+        "Pending": { status: "Pending", date: null },
+        "Ongoing": { status: "Ongoing", date: null },
+        "Resolved": { status: "Resolved", date: null },
+        "This Week": { status: null, date: "This Week" },
+        "This Month": { status: null, date: "This Month" }
     };
 
     document.querySelectorAll('.menu-item').forEach((menuItem) => {
@@ -122,10 +158,10 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleActive(menuItem);
 
             // Determine the filter based on the button clicked
-            const statusFilter = sidebarOptions[menuItem.textContent.trim()];
+            const { status, date } = sidebarOptions[menuItem.textContent.trim()];
 
             // Fetch and display filtered feedback
-            feedbackTableByStatus(statusFilter)
+            feedbackTableByStatus(status, date)
                 .then(feedbackList => {
                     feedbackItems.innerHTML = ''; // Clear existing feedback
 

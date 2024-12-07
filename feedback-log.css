@@ -248,7 +248,7 @@ td.feedback-status .status-background {
   align-items: center;
   border-bottom: 2px solid #e0e0e0;
   padding-bottom: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .header-content .left-icons{
@@ -306,7 +306,7 @@ td.feedback-status .status-background {
 }
 
 .feedback-content {
-      margin-bottom: 40px;
+      margin-bottom: 30px;
       font-family: 'Montserrat', sans-serif;
 }
 
@@ -316,6 +316,7 @@ td.feedback-status .status-background {
   color: #888;
   margin-bottom: 5px;
 }
+
 .feedback-content .from {
   font-size: 16px;
   font-weight: 600;
@@ -335,8 +336,9 @@ td.feedback-status .status-background {
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
+
 .feedback-content .body {
   font-size: 14px;
   color: #333;
@@ -347,7 +349,7 @@ td.feedback-status .status-background {
   border-top: 1px solid #ccc;
   margin-top: 20px;
   padding-top: 30px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -356,45 +358,32 @@ td.feedback-status .status-background {
   font-weight: 700;
   font-style: normal;
   color: #00a357;
+  margin-top: 10px;
+}
+
+.status-update .status-date {
+  font-size: 14px;
+  font-style: normal;
+  color: #888;
   margin-bottom: 5px;
 }
 
 .status-update .status-from {
   font-size: 16px;
   font-weight: 600;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+}
+
+.status-from .name {
+  font-weight: 600;
+}
+
+.status-from .email {
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .status-update .status-body {
-  font-size: 14px;
-  color: #333;
-  line-height: 1.6;
-}
-
-
-.status-update-admin {
-  border-top: 1px solid #ccc;
-  margin-top: 20px;
-  padding-top: 30px;
-  margin-bottom: 40px;
-  font-family: 'Montserrat', sans-serif;
-}
-
-.status-update-admin .status-title {
-  font-size: 14px;
-  font-weight: 700;
-  font-style: normal;
-  color: #00a357;
-  margin-bottom: 5px;
-}
-
-.status-update-admin .status-from {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 30px;
-}
-
-.status-update-admin .status-body {
   font-size: 14px;
   color: #333;
   line-height: 1.6;
@@ -422,4 +411,8 @@ td.feedback-status .status-background {
   background-color: #00A357; 
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15); 
   color: #ffffff;
+}
+
+#goBackButton {
+  cursor: pointer;
 }

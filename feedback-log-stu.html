@@ -25,27 +25,27 @@
                     </button>
                 </div>
 
-                <div class="sidebar-option menu-item active" onclick="toggleActive(this)">
+                <div class="sidebar-option menu-item active">
                     <i class="fas fa-inbox"></i>
                     <span>All Feedback</span>
                 </div>
-                <div class="sidebar-option menu-item" onclick="toggleActive(this)">
+                <div class="sidebar-option menu-item">
                     <span class="status-dot pending"></span>
                     <span>Pending</span>
                 </div>
-                <div class="sidebar-option menu-item" onclick="toggleActive(this)">
+                <div class="sidebar-option menu-item">
                     <span class="status-dot ongoing"></span>
                     <span>Ongoing</span>
                 </div>
-                <div class="sidebar-option menu-item" onclick="toggleActive(this)">
+                <div class="sidebar-option menu-item">
                     <span class="status-dot resolved"></span>
                     <span>Resolved</span>
                 </div>
-                <div class="sidebar-option menu-item" onclick="toggleActive(this)">
+                <div class="sidebar-option menu-item">
                     <span class="sort-this-week"></span>
                     <span>This Week</span>
                 </div>
-                <div class="sidebar-option menu-item" onclick="toggleActive(this)">
+                <div class="sidebar-option menu-item">
                     <span class="sort-this-month"></span>
                     <span>Date within</span>
                 </div>
@@ -77,8 +77,8 @@
             <div id="feedback-content-container" class="feedback-hidden">
                 <div class="header-content">
                     <div class="left-icons">
-                        <i class="fas fa-arrow-left" onclick="goBack()"></i>
-                    </div>
+                        <i class="fas fa-arrow-left" id="goBackButton" style="cursor: pointer;"></i>
+                    </div>                    
                     <div class="status">
                         <span class="header-type"></span>
                         <span class="status-badge"></span>
@@ -94,110 +94,8 @@
                 <div id="status-updates"></div>
             </div>
         </main>
-        
-        <script>
-            // Static example feedback data
-            const feedbackData = [
-                { text: "Make Monday to Friday holidays so we can enjoy life - Testing for long titles as long as it can carry 100 characters haha", type: "Suggestion", status: "Ongoing", date: "June 9, 2024", to:"Collegiate Office", from: "Charles Smith Gamilla &lt;ace0369@dlsud.edu.ph&gt;",
-                    body: "The amber droplet hung from the branch, reaching fullness and ready to drop. It waited. While many of the other droplets were satisfied to form as big as they could and release, this droplet had other plans. It wanted to be part of history. It wanted to be remembered long after all the other droplets had dissolved into history. So it waited for the perfect specimen to fly by to trap and capture that it hoped would eventually be discovered hundreds of years in the future.",
-                    updates: [
-                        { title: "Status Update - Ongoing", body: "We are working on your suggestion." },
-                        { title: "Status Update - Ongoing", body: "We are working on your suggestion." },
-                        { title: "Status Update - Ongoing", body: "We are working on your suggestion." },
-                        { title: "Status Update - Ongoing", body: "We are working on your suggestion." },
-                    ] },
-                    { text: "Make Monday to Friday holidays so we can enjoy life", type: "Suggestion", status: "Pending", date: "June 9, 2024", to:"Collegiate Office", from: "Charles Smith Gamilla &lt;ace0369@dlsud.edu.ph&gt;",
-                    body: "The amber droplet hung from the branch, reaching fullness and ready to drop. It waited. While many of the other droplets were satisfied to form as big as they could and release, this droplet had other plans. It wanted to be part of history. It wanted to be remembered long after all the other droplets had dissolved into history. So it waited for the perfect specimen to fly by to trap and capture that it hoped would eventually be discovered hundreds of years in the future. The amber droplet hung from the branch, reaching fullness and ready to drop. It waited. While many of the other droplets were satisfied to form as big as they could and release, this droplet had other plans. It wanted to be part of history. It wanted to be remembered long after all the other droplets had dissolved into history. So it waited for the perfect specimen to fly by to trap and capture that it hoped would eventually be discovered hundreds of years in the future. The amber droplet hung from the branch, reaching fullness and ready to drop. It waited. While many of the other droplets were satisfied to form as big as they could and release, this droplet had other plans. It wanted to be part of history. It wanted to be remembered long after all the other droplets had dissolved into history. So it waited for the perfect specimen to fly by to trap and capture that it hoped would eventually be discovered hundreds of years in the future.",
-                    updates: [
-                        { title: "Status Update - Ongoing", body: "We are working on your suggestion. The amber droplet hung from the branch, reaching fullness and ready to drop. It waited. While many of the other droplets were satisfied to form as big as they could and release, this droplet had other plans. It wanted to be part of history. It wanted to be remembered long after all the other droplets had dissolved into history. So it waited for the perfect specimen to fly by to trap and capture that it hoped would eventually be discovered hundreds of years in the future." },
-                        { title: "Status Update - Ongoing", body: "We are working on your suggestion." },
-                        { title: "Status Update - Ongoing", body: "We are working on your suggestion." },
-                    ] },
-                    { text: "Make Monday to Friday holidays so we can enjoy life", type: "Suggestion", status: "Resolved", date: "June 9, 2024", to:"Collegiate Office", from: "Charles Smith Gamilla &lt;ace0369@dlsud.edu.ph&gt;",
-                    body: "The amber droplet hung from the branch, reaching fullness and ready to drop. It waited. While many of the other droplets were satisfied to form as big as they could and release, this droplet had other plans. It wanted to be part of history. It wanted to be remembered long after all the other droplets had dissolved into history. So it waited for the perfect specimen to fly by to trap and capture that it hoped would eventually be discovered hundreds of years in the future.",
-                    updates: [
-                        { title: "Status Update - Ongoing", body: "We are working on your suggestion." },
-                        { title: "Status Update - Resolved", body: "We are working on your suggestion." },
-                    ] },
-            ];
-            
-            // color classes based on status
-            const statusClasses = {
-                "Pending": "pending",
-                "Ongoing": "ongoing",
-                "Resolved": "resolved"
-            };
-
-            // status color
-
-            // TABLE FEEDBACK LOG 
-            function renderFeedback(feedback, index) {
-                const feedbackRow = document.createElement('tr'); // table row
-        
-                const statusClass = statusClasses[feedback.status] || "pending";  // Default to pending
-        
-                feedbackRow.innerHTML = `
-                    <td class="feedback-text">${feedback.text.length > 100 ? feedback.text.slice(0, 100) + "..." : feedback.text}</td>
-                    <td class="feedback-type">${feedback.type}</td>
-                    <td class="feedback-status"><div class="status-background ${statusClass}">${feedback.status}</div></td>
-                    <td class="feedback-date">${feedback.date}</td>
-                `;
-                feedbackRow.addEventListener('click', () => displayFeedback(index));
-                document.getElementById('feedback-items').appendChild(feedbackRow);
-            }
-            
-            // FEEDBACK VIEW
-            function displayFeedback(index){
-                const feedback = feedbackData[index];
-                document.querySelector('.header-type').textContent = feedback.type;
-
-                const statusClass = statusClasses[feedback.status] || "pending";  // Default to pending
-                const statusText = document.querySelector('.status-badge');
-                statusText.textContent = feedback.status; 
-                statusText.className = `status-badge ${statusClass}`; 
-
-                document.querySelector('.date').textContent = feedback.date;
-                document.querySelector('.to').innerHTML = `To ${feedback.to || 'N/A'}`;
-                document.querySelector('.from').innerHTML = `<span class="name">${feedback.from.split('&lt;')[0]}</span> <span class="email">&lt;${feedback.from.split('&lt;')[1]}</span>`;
-                document.querySelector('.subject').textContent = feedback.text;
-                document.querySelector('.body').textContent = feedback.body;
-
-                const updatesDiv = document.getElementById('status-updates');
-                updatesDiv.innerHTML = feedback.updates ? feedback.updates.map(update => `
-                    <div class="status-update">
-                        <div class="status-title">${update.title}</div>
-                        <div class="status-from">${feedback.from}</div>
-                        <div class="status-body">${update.body}</div>
-                    </div>
-                `).join('') : '';
-                
-                document.getElementById('feedback-content-container').classList.remove('feedback-hidden');
-                document.getElementById('feedback-table').classList.add('feedback-hidden');
-            }
-            
-            
-            function goBack() {
-                document.getElementById('feedback-content-container').classList.add('feedback-hidden');
-                document.getElementById('feedback-table').classList.remove('feedback-hidden');
-            }
-
-            // sidebar buttons
-            function toggleActive(element) {
-            var items = document.querySelectorAll('.menu-item');
-            items.forEach(function(item) {
-                item.classList.remove('active');
-            });
-
-            element.classList.add('active');
-            }
-
-
-            document.addEventListener('DOMContentLoaded', () => {
-                feedbackData.forEach(renderFeedback);
-            });
-    
-        </script>        
     </div>
     <script type="module" src="auth.js"></script>
+    <script type="module" src="feedback-log.js"></script>
 </body>
 </html>

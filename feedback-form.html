@@ -28,12 +28,22 @@
             </div>
 
             <div class="feedback-section">
-                <label for="description">Description</label>
+                <label for="description">Description
+                    <span class="guide-box">
+                        ?
+                        <span class="hover-message">Provide a detailed description of your feedback to help us understand it better.</span>
+                    </span>
+                </label>
                 <textarea id="description" name="description" placeholder="Please describe your feedback in detail" rows="12" required></textarea>
             </div>
 
             <div class="feedback-section">
-                <label for="attachment">Attachment/Proof</label>
+                <label for="attachment">Attachment/Proof
+                    <span class="guide-box">
+                        ?
+                        <span class="hover-message">Attach any relevant documents or images that support your feedback.</span>
+                    </span>
+                </label>
                 <div class="attachment-file-container">
                     <input type="file" id="attachment" name="filename">
                 </div>
@@ -41,7 +51,12 @@
             
             <div class="type-college">
                 <div class="feedback-section">
-                    <label for="feedback-type">Feedback Type</label>
+                    <label for="feedback-type">Feedback Type
+                        <span class="guide-box">
+                            ?
+                            <span class="hover-message">Select the category that best fits your feedback. Is it a concern or a suggestion?</span>
+                        </span>
+                    </label>
                     <div class="radio-container">
                         <div class="radio-inner-container">
                             <input type="radio" id="suggestion" name="feedback-type" value="Suggestion" required><label>Suggestion</label>
@@ -53,7 +68,12 @@
                 </div>
 
                 <div class="feedback-section">
-                    <label for="college" required>Relevant College</label>
+                    <label for="college" required>Relevant College
+                        <span class="guide-box">
+                            ?
+                            <span class="hover-message">Select the academic department that should receive your feedback.</span>
+                        </span>
+                    </label>
                     <select name="college" id="college" required>
                         <option disabled selected value>Select College</option>
                         <option value="College of Business Administration and Accountancy">Business Administration and Accountancy</option>

@@ -1,5 +1,5 @@
 import { auth, database } from './firebase.js'; // Import Firebase initialization
-import { ref, push, set, child, get } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
+import { ref, push, set, child, get, update } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
 
 // Fetch the current feedback from localStorage
 document.addEventListener('DOMContentLoaded', () => {
@@ -55,6 +55,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         // Push the new update under the feedback's updates
                         const newUpdateRef = push(updatesRef);
                         await set(newUpdateRef, updateData);
+
+                        // Also update the feedback's status
+                        const feedbackUpdateData = {
+                            status // Update feedback status to the selected status
+                        };
+
+                        await update(feedbackRef, feedbackUpdateData); // Update the feedback status
 
                         alert('Feedback has been updated successfully!');
                         

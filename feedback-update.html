@@ -15,10 +15,8 @@
 
     <div class="form-container">
         <div class="update-feedback-preview">
-            <h1>Feedback Title</h1>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas voluptas nihil eaque explicabo, corporis quaerat sunt repellendus inventore magni architecto. 
-                Quos impedit quibusdam sit quo sint dolorem laborum, assumenda et! Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, tempora. Unde, deserunt culpa? 
-                Eaque aliquam dolorum illo adipisci quisquam molestiae dolores atque sed, similique animi neque tempore et magnam itaque!</p>
+            <h1 id="feedback-title">Feedback Title</h1>
+            <p id="feedback-description">Feedback description will appear here.</p>
         </div>
 
         <form>
@@ -27,33 +25,27 @@
                 <textarea id="description" name="description" placeholder="Please provide an update message to the user" rows="12" required></textarea>
             </div>
 
-            <div class="feedback-section">
-                <label for="attachment">Attachment</label>
-                <div class="attachment-file-container">
-                    <input type="file" id="attachment" name="filename">
-                </div>
-            </div>
-            
-            <div class="category-college">
+            <div class="type-college">
                 <div class="feedback-section">
                     <label for="feedback-status-update">Feedback Status Update</label>
                     <div class="radio-container">
                         <div class="radio-inner-container">
-                            <input type="radio" id="pending" name="feedback-status-update" value="pending" required><label>Pending</label>
+                            <input type="radio" id="pending" name="feedback-status-update" value="Pending" required><label>Pending</label>
                         </div>
                         <div class="radio-inner-container">
-                            <input type="radio" id="ongoing" name="feedback-status-update" value="ongoing"><label>Ongoing</label>
+                            <input type="radio" id="ongoing" name="feedback-status-update" value="Ongoing"><label>Ongoing</label>
                         </div>
                         <div class="radio-inner-container">
-                            <input type="radio" id="resolved" name="feedback-status-update" value="resolved"><label>Resolved</label>
+                            <input type="radio" id="resolved" name="feedback-status-update" value="Resolved"><label>Resolved</label>
                         </div>
                     </div>
                 </div>
-
             </div>
+            <!-- Submit button -->
             <div class="feedback-section submit-container"><input class="feedback-submit" type="submit" value="SUBMIT FEEDBACK"></div>
         </form>
     </div>
     <script type="module" src="auth.js"></script>
+    <script type="module" src="feedback-update.js"></script>
 </body>
 </html>

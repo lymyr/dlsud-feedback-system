@@ -85,6 +85,7 @@ p, span {
     text-shadow: none;
     letter-spacing: 6px;
     font-size: 20px;
+    cursor: default;
 }
 
 /* dashboard */
@@ -134,27 +135,10 @@ input[type="text"] {
     margin-top: 42px;
 }
 .login-insighter {
-    border-radius: 50%;
-    transition: 3s;
-    background-color: var(--accent2);
-    padding:12px;
+    background-color: white;
     margin-bottom: 12px;
-    animation: changeStyle 4s forwards;
 }
 
-@keyframes changeStyle {
-    0% {
-        border-radius: 50%;
-        background-color: #000000;
-    }
-    100% {
-        border-radius: 24px;
-    }
-}
-
-.login-insighter-stu {
-    background-color: var(--accent);
-}
 .form-flex-container {
     display: flex;
     flex-direction: column;
@@ -486,7 +470,7 @@ label {
     margin-top: 64px;
     text-shadow: 0px 0px 0px;
     text-decoration: none;
-    transition: 0.5s;
+    transition: 0.3s;
 }
 
 .dashboard-stu-btn:hover {
@@ -532,11 +516,11 @@ label {
     border-radius: 22px;
     color:black;
     align-content: center;
-    transition: 0.5s;
+    transition: 0.2s;
 }
 
 .stu-feedback-status:hover {
-    background-color: white;
+    filter: brightness(105%);
     cursor: default;
 }
 
@@ -575,11 +559,11 @@ label {
     justify-content: space-between;
     padding:48px;
     align-items: center;
-    transition: 0.7s;
+    transition: 0.2s;
 }
 
 .guidelines-item:hover {
-    opacity: 75%;
+    filter:brightness(110%);
 }
 
 .guidelines-item > :nth-child(1) {
@@ -753,7 +737,7 @@ label {
 }
 
 .metrics-box-container > * {
-    transition: 0.7s;
+    transition: 150ms;
 }
 
 .metrics-box-container>*:hover {
@@ -825,4 +809,9 @@ label {
 }
 .monthly {
     background-color: rgb(156, 199, 230);
+}
+
+.index-login:hover {
+    background-color: var(--accent2);
+    color:white;
 }

@@ -1,22 +1,3 @@
-Note:
-- put commits in commit-msg.text for multi-line messages, tho pwede rin normal commit message lang
-- may use "git commit -F commit-msg.txt" in terminal
-
-known issues:
-- inbox feedback title overflow for stu-feedback-log.html
-	- lengthy feedback titles lead to expanding of grid
-	- used band aid solution for now
-- inbox right-most text header overflow for stu-feedback-log.html
-- used dark background instead of image used in figma for feedback-form.html
-	- background image is provided in pics folder
-- pt sans caption does not work
-
-Could improve
-- preview of what feedback is being updated for the admin side
-- header navigation. Could change depending on what page is currently on
-
-To do:
-- hover indicators
-- feedback log for admin and student
-	- inbox
-	- preview
+- added logo
+- fixed feedback-update.html where feedback preview stretches the container
+- revamp feedback metrics in admin dashboard

@@ -135,15 +135,23 @@ input[type="text"] {
 }
 .login-insighter {
     border-radius: 50%;
-    transition: 0.7s;
+    transition: 3s;
     background-color: var(--accent2);
     padding:12px;
     margin-bottom: 12px;
+    animation: changeStyle 4s forwards;
 }
-.login-insighter:hover {
-    border-radius: 24px;
-    opacity: 90%;
+
+@keyframes changeStyle {
+    0% {
+        border-radius: 50%;
+        background-color: #000000;
+    }
+    100% {
+        border-radius: 24px;
+    }
 }
+
 .login-insighter-stu {
     background-color: var(--accent);
 }

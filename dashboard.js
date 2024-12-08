@@ -68,10 +68,15 @@ auth.onAuthStateChanged(user => {
                     let adminPendingCount = 0;
                     let adminOngoingCount = 0;
                     let adminResolvedCount = 0;
+                    let adminThisWeekCount = 0;
+                    let adminThisMonthCount = 0;
                     let suggestionCount = 0;
                     let concernCount = 0;
 
                     Object.values(feedbacks).forEach(feedback => {
+                        const isThisWeek = isDateInRange(feedback.dateTime, 'This Week');
+                        const isThisMonth = isDateInRange(feedback.dateTime, 'This Month');
+
                         // For Students: Count feedbacks with their UID
                         if (feedback.student === uid) {
                             studentTotalFeedback++;
@@ -88,6 +93,8 @@ auth.onAuthStateChanged(user => {
                             if (feedback.status === 'Resolved') adminResolvedCount++;
                             if (feedback.type === 'Suggestion') suggestionCount++;
                             if (feedback.type === 'Concern') concernCount++;
+                            if (isThisWeek) adminThisWeekCount++;
+                            if (isThisMonth) adminThisMonthCount++;
                         }
                     });
 
@@ -102,10 +109,39 @@ auth.onAuthStateChanged(user => {
                     setElementTextContent('admin-pending-feedback', adminPendingCount);
                     setElementTextContent('admin-ongoing-feedback', adminOngoingCount);
                     setElementTextContent('admin-resolved-feedback', adminResolvedCount);
+                    setElementTextContent('admin-weekly-feedback', adminThisWeekCount);
+                    setElementTextContent('admin-monthly-feedback', adminThisMonthCount);
                     setElementTextContent('suggestion-feedback', suggestionCount);
                     setElementTextContent('concern-feedback', concernCount);
                 }
             });
+
+            // Helper function to check if a date is within the given range (for this week or this month)
+            function isDateInRange(feedbackDateTime, dateFilter) {
+                const feedbackDate = new Date(feedbackDateTime);
+                const currentDate = new Date();
+
+                if (dateFilter === 'This Week') {
+                    const startOfWeek = new Date(currentDate);
+                    startOfWeek.setDate(currentDate.getDate() - currentDate.getDay());
+                    startOfWeek.setHours(0, 0, 0, 0);
+
+                    const endOfWeek = new Date(startOfWeek);
+                    endOfWeek.setDate(startOfWeek.getDate() + 6);
+                    endOfWeek.setHours(23, 59, 59, 999);
+
+                    return feedbackDate >= startOfWeek && feedbackDate <= endOfWeek;
+                } else if (dateFilter === 'This Month') {
+                    const startOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+                    startOfMonth.setHours(0, 0, 0, 0);
+
+                    const endOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+                    endOfMonth.setHours(23, 59, 59, 999);
+
+                    return feedbackDate >= startOfMonth && feedbackDate <= endOfMonth;
+                }
+                return false;
+            }
         });
     }
 });

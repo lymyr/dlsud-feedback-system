@@ -708,13 +708,9 @@ label {
 .dashboard-admin-btn:hover {
     background-color: #b0cff7;
 }
-.metrics-container-container {
-    background-color: #daffee;
-    padding:54px;
-}
 
 .metrics-container {
-    margin-bottom:120px;
+    margin-bottom:84px;
     padding:120px 0px;
 }
 
@@ -733,11 +729,11 @@ label {
 }
 
 .metrics-container > h6 {
-    font-size: 24px;
+    font-size: 42px;
     letter-spacing: -0.24px;
     margin-left: 24px;
     text-align: center;
-    margin-bottom: 24px;
+    margin-bottom: 64px;
 }
 
 .metrics-box-container {
@@ -753,9 +749,10 @@ label {
 }
 
 .metrics-box-container>*:hover {
-    font-size: 19px;
-    opacity: 70%;
+    filter:brightness(105%);
     cursor:default;
+    position: relative;
+    width:325px;
 }
 
 .metrics-box {
@@ -816,8 +813,8 @@ label {
     background-color: #73BDDD;
 }
 .weekly{
-    background-color: gray;
+    background-color: rgb(224, 176, 122);
 }
 .monthly {
-    background-color: grey;
+    background-color: rgb(156, 199, 230);
 }

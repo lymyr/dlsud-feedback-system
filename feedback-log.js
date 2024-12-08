@@ -1,20 +1,30 @@
 import { database, auth } from './firebase.js';
 import { getDatabase, ref, get, onValue } from 'https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js';
 
+// Write Feedback button
 document.addEventListener('DOMContentLoaded', () => {
-    // Check if the "Write Feedback" button exists
     const writeFeedbackBtn = document.querySelector('.write-feedback-btn');
     
     if (writeFeedbackBtn) {
-        // Attach event listener to the button
         writeFeedbackBtn.addEventListener('click', () => {
-            // Redirect to the feedback form page
             window.location.href = './feedback-form.html';
         });
     }
 });
 
-// Fetch feedback to table based on user role (student/admin)
+// Function to format date when displayed
+function formatDate(isoDate) {
+    return new Date(isoDate).toLocaleString('en-US', {
+        month: 'short',
+        day: '2-digit',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+    });
+}
+
+// Function to filter feedback in the table based on user role (student/admin)
 export function feedbackTable() {
     return new Promise((resolve, reject) => {
         auth.onAuthStateChanged((user) => {
@@ -59,7 +69,7 @@ export function feedbackTable() {
     });
 }
 
-// Function to filter feedback based on status or date (sidebar options)
+// Function to filter feedback in the table based on status or date (sidebar options)
 function feedbackTableByStatus(statusFilter = null, dateFilter = null) {
     return new Promise((resolve, reject) => {
         auth.onAuthStateChanged((user) => {
@@ -106,7 +116,7 @@ function feedbackTableByStatus(statusFilter = null, dateFilter = null) {
     });
 }
 
-// Helper function to check if a date is within the given range (for this week or this month)
+// Helper function to check if a date is within the given range (this week or this month)
 function isDateInRange(feedbackDateTime, dateFilter) {
     const feedbackDate = new Date(feedbackDateTime);
     const currentDate = new Date();
@@ -191,23 +201,6 @@ function toggleActive(element) {
     element.classList.add('active');
 }
 
-// Feedback View goBack button
-function goBack() {
-    // Reset the updates display
-    const updatesDiv = document.getElementById('status-updates');
-    updatesDiv.innerHTML = ''; // Clear any previous updates
-
-    // Hide the feedback content and show the feedback table
-    document.getElementById('feedback-content-container').classList.add('feedback-hidden');
-    document.getElementById('feedback-table').classList.remove('feedback-hidden');
-}
-
-// Attach goBack() to the button after the DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    const goBackButton = document.getElementById('goBackButton');
-    goBackButton.addEventListener('click', goBack);
-});
-
 // Fetch and display feedback for feedback table
 feedbackTable().then(feedbackList => {
     const feedbackItems = document.getElementById('feedback-items');
@@ -234,14 +227,14 @@ function renderFeedback(feedback, index) {
         <td class="feedback-text">${feedback.title.length > 100 ? feedback.title.slice(0, 100) + "..." : feedback.title}</td>
         <td class="feedback-type">${feedback.type}</td>
         <td class="feedback-status"><div class="status-background ${statusClass}">${feedback.status}</div></td>
-        <td class="feedback-date">${new Date(feedback.dateTime).toLocaleString()}</td>
+        <td class="feedback-date">${formatDate(feedback.dateTime)}</td>
     `;
 
     feedbackRow.addEventListener('click', () => feedbackView(feedback)); // Pass the feedback data for feedbackView
     document.getElementById('feedback-items').appendChild(feedbackRow); // Add feedback items to body
 }
 
-// Function to get user details from Firebase using UID
+// Function to get user details for Feedback View
 async function getUserDetails(uid) {
     const db = getDatabase(); // Get the Firebase database instance
     const userRef = ref(db, 'users/' + uid); // Access the 'users' collection and fetch the user by UID
@@ -275,7 +268,7 @@ async function feedbackView(feedback) {
 
     const user = await getUserDetails(feedback.student);
     document.querySelector('.from').innerHTML = `<span class="name">${user.name}</span> <span class="email">&lt;${user.email}&gt;</span>`;
-    document.querySelector('.date').textContent = new Date(feedback.dateTime).toLocaleString();
+    document.querySelector('.date').textContent = formatDate(feedback.dateTime);
     document.querySelector('.to').innerHTML = `Submitted to ${feedback.college}`;
     document.querySelector('.subject').textContent = feedback.title;
     document.querySelector('.body').textContent = feedback.description;
@@ -301,7 +294,7 @@ async function feedbackView(feedback) {
 
         updatesDiv.innerHTML = updatesWithAdmin.map(update => `
             <div class="status-update">
-                <div class="status-date">Updated on ${new Date(update.dateTime).toLocaleString()}</div>
+                <div class="status-date">Updated on ${formatDate(feedback.dateTime)}</div>
                 <div class="status-from">
                     <span class="name">${update.adminName}</span> 
                     <span class="email">&lt;${update.adminEmail}&gt;</span>
@@ -315,6 +308,23 @@ async function feedbackView(feedback) {
     document.getElementById('feedback-content-container').classList.remove('feedback-hidden');
     document.getElementById('feedback-table').classList.add('feedback-hidden');
 }
+
+// Feedback View goBack button
+function goBack() {
+    // Reset the updates display
+    const updatesDiv = document.getElementById('status-updates');
+    updatesDiv.innerHTML = ''; // Clear any previous updates
+
+    // Hide the feedback content and show the feedback table
+    document.getElementById('feedback-content-container').classList.add('feedback-hidden');
+    document.getElementById('feedback-table').classList.remove('feedback-hidden');
+}
+
+// Attach goBack() to the button after the DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    const goBackButton = document.getElementById('goBackButton');
+    goBackButton.addEventListener('click', goBack);
+});
 
 // Update button directs to feedback-update.html
 const updateButton = document.getElementById('update-btn');

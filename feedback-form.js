@@ -50,6 +50,7 @@ feedbackForm.addEventListener('submit', async (event) => {
         await set(newFeedbackRef, feedbackData);
 
         alert('Your feedback has been submitted successfully!');
+        window.location.href = 'feedback-log-stu.html';
 
         // Clear the form
         feedbackForm.reset();

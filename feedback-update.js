@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         await update(feedbackRef, feedbackUpdateData); // Update the feedback status
 
                         alert('Feedback has been updated successfully!');
+                        window.location.href = 'feedback-log-admin.html';
                         
                         // Optionally clear the form after submitting
                         feedbackForm.reset();

@@ -235,7 +235,7 @@ async function feedbackView(feedback) {
 
         updatesDiv.innerHTML = updatesWithAdmin.map(update => `
             <div class="status-update">
-                <div class="status-date">Updated on ${formatDate(feedback.dateTime)}</div>
+                <div class="status-date">Updated on ${formatDate(update.dateTime)}</div>
                 <div class="status-from">
                     <span class="name">${update.adminName}</span> 
                     <span class="email">&lt;${update.adminEmail}&gt;</span>

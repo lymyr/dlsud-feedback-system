@@ -4,7 +4,6 @@ import { getDatabase, ref, get, onValue } from 'https://www.gstatic.com/firebase
 // Write Feedback button
 document.addEventListener('DOMContentLoaded', () => {
     const writeFeedbackBtn = document.querySelector('.write-feedback-btn');
-    
     if (writeFeedbackBtn) {
         writeFeedbackBtn.addEventListener('click', () => {
             window.location.href = './feedback-form.html';
@@ -118,17 +117,17 @@ function displayFeedback(feedback, index) {
     const statusClass = statusClasses[feedback.status] || "pending"; // Default to pending
 
     feedbackRow.innerHTML = `
-        <td class="feedback-text">${feedback.title.length > 100 ? feedback.title.slice(0, 100) + "..." : feedback.title}</td>
+        <td class="feedback-text">${feedback.title.length > 70 ? feedback.title.slice(0, 70) + "..." : feedback.title}</td>
         <td class="feedback-type">${feedback.type}</td>
         <td class="feedback-status"><div class="status-background ${statusClass}">${feedback.status}</div></td>
         <td class="feedback-date">${formatDate(feedback.dateTime)}</td>
     `;
 
-    feedbackRow.addEventListener('click', () => feedbackView(feedback)); // Pass the feedback data for Feedback View when clicked
     document.getElementById('feedback-items').appendChild(feedbackRow); // Add feedback items to body
+    feedbackRow.addEventListener('click', () => feedbackView(feedback)); // Pass the feedback data for Feedback View when clicked
 }
 
-// Function to toggle active class in sidebar buttons
+// Function to style active class in sidebar buttons
 function toggleActive(element) {
     const items = document.querySelectorAll('.menu-item');
     items.forEach(item => item.classList.remove('active'));
@@ -160,9 +159,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Display feedback table when sidebar options are clicked
     document.querySelectorAll('.menu-item').forEach((menuItem) => {
         menuItem.addEventListener('click', () => {
-            // Highlight the selected menu item
+            // Call toggleActive to style the selected menu item
             toggleActive(menuItem);
-            // Determine the filter based on the button clicked
+            // Determine the filter based on the sidebar option clicked
             const { status, date } = sidebarOptions[menuItem.textContent.trim()];
 
             // Display filtered feedback table
@@ -172,6 +171,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }).catch(error => {
                     console.error('Error fetching feedback:', error);
                 });
+            
+            // Exit Feedback View when sidebar options are clicked
+            document.getElementById('feedback-content-container').classList.add('feedback-hidden');
+            document.getElementById('feedback-table').classList.remove('feedback-hidden');
         });
     });
 });
@@ -215,13 +218,15 @@ async function feedbackView(feedback) {
     document.querySelector('.subject').textContent = feedback.title;
     document.querySelector('.body').textContent = feedback.description;
 
+    // Feedback Updates
     const updatesDiv = document.getElementById('status-updates');
+    updatesDiv.innerHTML = ''; // Reset the updates display
 
     // Check if the feedback has the "updates" field
     if (feedback.updates) {
         // Convert the updates object to an array and sort by date (ascending)
         const sortedUpdates = Object.values(feedback.updates).sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime));
-        // Fetch admin details for each update and map sorted updates to HTML elements
+        // Fetch admin details for each update
         const updatesWithAdmin = await Promise.all(
             sortedUpdates.map(async (update) => {
                 const adminDetails = await getUserDetails(update.admin);
@@ -233,6 +238,7 @@ async function feedbackView(feedback) {
             })
         );
 
+        // Map values to HTML elements and display Feedback Updates
         updatesDiv.innerHTML = updatesWithAdmin.map(update => `
             <div class="status-update">
                 <div class="status-date">Updated on ${formatDate(update.dateTime)}</div>
@@ -254,8 +260,6 @@ async function feedbackView(feedback) {
 document.addEventListener('DOMContentLoaded', () => {
     const goBackButton = document.getElementById('goBackButton');
     goBackButton.addEventListener('click', () => {
-        const updatesDiv = document.getElementById('status-updates');
-        updatesDiv.innerHTML = ''; // Reset the updates display
         document.getElementById('feedback-content-container').classList.add('feedback-hidden');
         document.getElementById('feedback-table').classList.remove('feedback-hidden');
     });

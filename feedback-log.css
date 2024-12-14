@@ -147,6 +147,10 @@
   overflow: auto;
 }
 
+.no-items {
+  font-family: 'Montserrat', sans-serif;
+}
+
 table {
   width: 100%;
   border: 1px solid #ccc;

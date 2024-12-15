@@ -58,8 +58,26 @@ function isDateInRange(feedbackDateTime, dateFilter) {
     return false;
 }
 
-// Function to filter feedback in the table based on user (student or admin), status/date (sidebar options)
-function filterFeedback(statusFilter = null, dateFilter = null) {
+
+function linearSearchKeyword(feedbackList, keyword) {
+    const results = [];
+    const lowerKeyword = keyword.toLowerCase();
+
+    // Loop through each feedback in the list
+    for (let i = 0; i < feedbackList.length; i++) {
+        const title = feedbackList[i].title.toLowerCase();
+
+        // Check if the title contains the keyword (anywhere in the title)
+        if (title.includes(lowerKeyword)) {
+            results.push(feedbackList[i]);
+        }
+    }
+
+    return results;
+}
+
+// Function to filter feedback in the table based on user (student or admin), status/date (sidebar options), and keyword
+function filterFeedback(statusFilter = null, dateFilter = null, keyword = null) {
     return new Promise((resolve, reject) => {
         auth.onAuthStateChanged((user) => {
             if (user) {
@@ -80,11 +98,14 @@ function filterFeedback(statusFilter = null, dateFilter = null) {
                             return;
                         }
 
-                        // Filter feedback based on role and status/date
-                        const filteredFeedback = Object.keys(feedbacks).map((key) => ({
+                        // Convert feedbacks object to an array with UIDs
+                        let feedbackList = Object.keys(feedbacks).map((key) => ({
                             ...feedbacks[key],
                             feedback_id: key // Store the feedback UIDs for Feedback View
-                        })).filter((feedback) => {
+                        }));
+
+                        // Apply filters: role, status, and date
+                        feedbackList = feedbackList.filter((feedback) => {
                             const matchesRole =
                                 userRole === 'Student'
                                     ? feedback.student === uid
@@ -95,7 +116,15 @@ function filterFeedback(statusFilter = null, dateFilter = null) {
                             return matchesRole && matchesStatus && matchesDate;
                         });
 
-                        resolve(filteredFeedback.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime)));
+                        // If keyword is provided, use linearSearchKeyword to filter further
+                        if (keyword) {
+                            feedbackList = linearSearchKeyword(feedbackList, keyword);
+                        }
+
+                        // Sort filtered feedbacks by date (newest first)
+                        const sortedFeedback = feedbackList.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime));
+
+                        resolve(sortedFeedback);
                     }, reject);
                 }, reject);
             } else {
@@ -104,6 +133,10 @@ function filterFeedback(statusFilter = null, dateFilter = null) {
         });
     });
 }
+
+
+
+
 
 // Function to display each feedback in the table
 function displayFeedback(feedback, index) {

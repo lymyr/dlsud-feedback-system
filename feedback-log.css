@@ -420,3 +420,57 @@ td.feedback-status .status-background {
 #goBackButton {
   cursor: pointer;
 }
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: auto;
+  position: relative;
+  width: 400px;
+}
+
+.search-bar input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%; 
+  padding-right: 35px;
+  font-family: 'Montserrat', sans-serif;
+  transition: padding-right 0.3s ease, width 0.3s ease;
+}
+
+.search-bar i {
+  position: absolute;
+  right: 10px;
+  color: #00A357;
+  pointer-events: none;
+  text-shadow: none;
+  transition: opacity 0.3s ease;
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: #00ff9d;
+}
+
+.search-bar input:focus + i {
+  opacity: 0;
+}
+
+.search-bar input:not(:focus):valid {
+  padding-right: 35px;
+}
+
+.search-bar input:not(:valid) {
+  padding-right: 35px;
+}
+
+.search-bar input:focus::placeholder {
+  opacity: 0;
+}
+
+.search-bar input:not(:focus)::placeholder {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}

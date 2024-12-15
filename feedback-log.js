@@ -57,12 +57,11 @@ function isDateInRange(feedbackDateTime, dateFilter) {
     return false;
 }
 
-
+// Linear Search to search logs
 function linearSearchKeyword(feedbackList, keyword) {
     const results = [];
     const lowerKeyword = keyword.toLowerCase();
 
-    // Loop through each feedback in the list
     for (let i = 0; i < feedbackList.length; i++) {
         const title = feedbackList[i].title.toLowerCase();
 
@@ -118,7 +117,6 @@ function filterFeedback(statusFilter = null, dateFilter = null, keyword = null) 
                             feedbackList = linearSearchKeyword(feedbackList, keyword);
                         }
 
-                        // Sort filtered feedbacks by date (newest first)
                         const sortedFeedback = feedbackList.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime));
 
                         resolve(sortedFeedback);
@@ -131,8 +129,22 @@ function filterFeedback(statusFilter = null, dateFilter = null, keyword = null) 
     });
 }
 
+// Search Bar Input
+document.addEventListener('DOMContentLoaded', () => {
+    const feedbackItems = document.getElementById('feedback-items');
+    const searchInput = document.getElementById('search'); 
 
-
+    // Search functionality for keyword filter
+    searchInput.addEventListener('input', () => {
+        const keyword = searchInput.value.trim();
+        filterFeedback(null, null, keyword).then(feedbackList => {
+            feedbackItems.innerHTML = '';
+            feedbackList.forEach((feedback, index) => displayFeedback(feedback, index));
+        }).catch(error => {
+            console.error('Error fetching filtered feedback:', error);
+        });
+    });
+});
 
 
 // Function to display each feedback in the table

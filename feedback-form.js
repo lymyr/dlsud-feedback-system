@@ -9,6 +9,29 @@ const attachmentInput = document.querySelector('#attachment');
 const typeRadioInputs = document.querySelectorAll('input[name="feedback-type"]');
 const collegeSelect = document.querySelector('#college');
 
+// Predict the category of feedback
+async function predictCategory(feedback) {
+    try {
+        const response = await fetch('http://127.0.0.1:5000/predict', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ feedback })
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch category prediction');
+        }
+
+        const data = await response.json();
+        return data.category;
+    } catch (error) {
+        console.error('Error predicting category:', error);
+        return 'Unknown'; // Fallback category
+    }
+}
+
 // Attach event listener to form submit
 feedbackForm.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -29,6 +52,10 @@ feedbackForm.addEventListener('submit', async (event) => {
     // Get the current date and time for feedback submission
     const dateTime = new Date().toISOString();
 
+    // Predict category
+    const combinedText = title + ". " + description;
+    const category = await predictCategory(combinedText);
+
     // Create feedback object
     const feedbackData = {
         title,
@@ -38,7 +65,8 @@ feedbackForm.addEventListener('submit', async (event) => {
         college,
         student: user.uid, // Use the UID of the logged-in user
         status: 'Pending', // Default status when submitted
-        dateTime
+        dateTime,
+        category
     };
 
     try {

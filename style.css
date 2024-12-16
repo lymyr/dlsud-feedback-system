@@ -525,7 +525,7 @@ label {
 }
 
 .status-total {
-    background-color: #97ff97;
+    background-color: #b8ffdc;
 }
 
 .status-pending {
@@ -742,10 +742,19 @@ label {
     background-color: #b28ef7;
 }
 .suggestions {
-    background-color: #7a99ee;
+    background-color: #96dbfc;
 }
 
 .index-login:hover {
     background-color: var(--accent2);
     color:white;
+}
+
+.metrics-container canvas {
+    display: block; /* Makes the canvas a block element for proper centering */
+    margin: 0 auto; /* Centers the canvas inside the container */
+    max-width: 100%; /* Ensures the chart is responsive */
+    background-color: white;
+    border-radius: 20px; /* Adds rounded corners */
+    padding: 20px;
 }

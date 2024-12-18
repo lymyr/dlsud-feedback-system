@@ -38,7 +38,7 @@ feedbackForm.addEventListener('submit', async (event) => {
 
     const title = titleInput.value;
     const description = descriptionInput.value;
-    const attachment = attachmentInput.files[0] || null; // Handle file attachment
+    const attachment = attachmentInput.files[0] || null;
     const type = [...typeRadioInputs].find(input => input.checked)?.value;
     const college = collegeSelect.value;
     const user = auth.currentUser;
@@ -60,7 +60,7 @@ feedbackForm.addEventListener('submit', async (event) => {
     const feedbackData = {
         title,
         description,
-        attachment: attachment ? attachment.name : null, // Store file name or null if no file
+        attachment: attachment ? attachment.name : null,
         type,
         college,
         student: user.uid, // Use the UID of the logged-in user

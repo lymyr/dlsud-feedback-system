@@ -167,6 +167,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const keyword = searchInput.value.trim();
         filterFeedback(null, null, null, keyword).then(feedbackList => {
             feedbackItems.innerHTML = '';
+            feedbackList.forEach((feedback, index) => formatFeedback(feedback, index));
+        }).catch(error => {
+            console.error('Error fetching filtered feedback:', error);
+        });
+    });
+});
+
+
+// Search Bar Input
+document.addEventListener('DOMContentLoaded', () => {
+    const feedbackItems = document.getElementById('feedback-items');
+    const searchInput = document.getElementById('search'); 
+
+    // Search functionality for keyword filter
+    searchInput.addEventListener('input', () => {
+        const keyword = searchInput.value.trim();
+        filterFeedback(null, null, null, keyword).then(feedbackList => {
+            feedbackItems.innerHTML = '';
             feedbackList.forEach((feedback, index) => displayFeedback(feedback, index));
         }).catch(error => {
             console.error('Error fetching filtered feedback:', error);
@@ -175,10 +193,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// Function to display each feedback in the table
-function displayFeedback(feedback, index) {
+// Function to format each feedback in the table
+function formatFeedback(feedback, index) {
     const feedbackRow = document.createElement('tr');
-
     // Color classes based on status
     const statusClasses = {
         "Pending": "pending",
@@ -205,17 +222,22 @@ function toggleActive(element) {
     element.classList.add('active');
 }
 
-// Call filterFeedback and displayFeedback to display filtered feedback table
+// Call filterFeedback and formatFeedback to display filtered feedback table
 document.addEventListener('DOMContentLoaded', () => {
 
     // Sidebar options (menu-items)
     const sidebarOptions = {
-        "All Feedback": { status: null, date: null },
-        "Pending": { status: "Pending", date: null },
-        "Ongoing": { status: "Ongoing", date: null },
-        "Resolved": { status: "Resolved", date: null },
-        "This Week": { status: null, date: "This Week" },
-        "This Month": { status: null, date: "This Month" }
+        "All Feedback": { status: null, date: null, category: null},
+        "Pending": { status: "Pending", date: null, category: null },
+        "Ongoing": { status: "Ongoing", date: null, category: null },
+        "Resolved": { status: "Resolved", date: null, category: null },
+        "This Week": { status: null, date: "This Week", category: null },
+        "This Month": { status: null, date: "This Month", category: null },
+        "Curriculum": { status: null, date: null, category: "Curriculum" },
+        "Assessments": { status: null, date: null, category: "Assessments" },
+        "Faculty": { status: null, date: null, category: "Faculty" },
+        "Facilities": { status: null, date: null, category: "Facilities" },
+        "Student Affairs": { status: null, date: null, category: "Student Affairs" }
     };
 
     // Track the currently selected menu item
@@ -223,8 +245,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to filter feedback based on the active menu item
     function applyFilter() {
-        const { status, date } = sidebarOptions[activeMenuItem];
-        filterFeedback(status, date)
+        const { status, date, category } = sidebarOptions[activeMenuItem];
+        filterFeedback(status, date, category)
             .then((feedbackList) => {
                 document.querySelector('.no-items').innerHTML = ''; // Clear no-items message
                 document.getElementById('feedback-items').innerHTML = ''; // Clear existing feedback
@@ -233,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.getElementById('feedback-table').classList.add('feedback-hidden');
                 } 
                 else {
-                    feedbackList.forEach((feedback, index) => displayFeedback(feedback, index)); // Display feedback if list is not empty
+                    feedbackList.forEach((feedback, index) => formatFeedback(feedback, index)); // Display feedback if list is not empty
                 }
             })
             .catch((error) => {

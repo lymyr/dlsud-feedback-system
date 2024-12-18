@@ -72,6 +72,11 @@ auth.onAuthStateChanged(user => {
                     let adminThisMonthCount = 0;
                     let suggestionCount = 0;
                     let concernCount = 0;
+                    let curriculumCount = 0;
+                    let assessmentsCount = 0;
+                    let facultyCount = 0;
+                    let facilitiesCount = 0;
+                    let affairsCount = 0;
 
                     Object.values(feedbacks).forEach(feedback => {
                         const isThisWeek = isDateInRange(feedback.dateTime, 'This Week');
@@ -95,6 +100,11 @@ auth.onAuthStateChanged(user => {
                             if (feedback.type === 'Concern') concernCount++;
                             if (isThisWeek) adminThisWeekCount++;
                             if (isThisMonth) adminThisMonthCount++;
+                            if (feedback.category === 'Curriculum') curriculumCount++;
+                            if (feedback.category === 'Assessments') assessmentsCount++;
+                            if (feedback.category === 'Faculty') facultyCount++;
+                            if (feedback.category === 'Facilities') facilitiesCount++;
+                            if (feedback.category === 'Student Affairs') affairsCount++;
                         }
                     });
 
@@ -113,6 +123,47 @@ auth.onAuthStateChanged(user => {
                     setElementTextContent('admin-monthly-feedback', adminThisMonthCount);
                     setElementTextContent('suggestion-feedback', suggestionCount);
                     setElementTextContent('concern-feedback', concernCount);
+
+                    // Admin Feedback Category Chart
+                    var xValues = ["Curriculum", "Assessments", "Faculty", "Facilities", "Student Affairs"];
+                    var yValues = [curriculumCount, assessmentsCount, facultyCount, facilitiesCount, affairsCount];
+                    var barColors = ["red", "green", "blue", "orange", "yellow"];
+
+                    // Sort the data (optional: to arrange counts from highest to lowest)
+                    var sortedIndices = yValues.map((value, index) => index)
+                    .sort((a, b) => yValues[b] - yValues[a]);
+                    xValues = sortedIndices.map(index => xValues[index]);
+                    yValues = sortedIndices.map(index => yValues[index]);
+                    barColors = sortedIndices.map(index => barColors[index]);
+
+                    // Create the chart
+                    new Chart("myChart", {
+                        type: "bar",
+                        data: {
+                            labels: xValues,
+                            datasets: [{
+                                backgroundColor: barColors,
+                                data: yValues
+                            }]
+                        },
+                        options: {
+                            legend: { display: false },
+                            title: {
+                                display: true,
+                                text: "Automated Feedback Categorization"
+                            },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true, // The scale starts at 0
+                                        callback: function(value) { // Only show integers
+                                            return Number.isInteger(value) ? value : null; 
+                                        },
+                                    }
+                                }]
+                            }
+                        }
+                    });
                 }
             });
 

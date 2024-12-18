@@ -477,7 +477,7 @@ label {
     background-color: #ffcf95;
 }
 
-.stu-feedback-status-container {
+.metrics-container {
     margin-top: -4px;
     padding:128px;
     text-align: center;
@@ -485,29 +485,29 @@ label {
     color:white;
 }
 
-.stu-feedback-status-container > :nth-child(1) {
+.metrics-container > :nth-child(1) {
     font-size: 40px;
     margin-bottom: 64px;
 }
 
-.stu-feedback-status-blocks {
+.metric-blocks {
     display:flex;
     justify-content: center;
 }
 
-.stu-feedback-status > h1 {
+.metric > h1 {
     font-family: pt-sans-caption;
     font-size: 48px;
     font-weight: bold;
     color: #3C3C3C;
 }
 
-.stu-feedback-status > h6 {
+.metric > h6 {
     color: #3C3C3C;
     font-size:16px;
 }
 
-.stu-feedback-status {
+.metric {
     padding: 64px;
     background-color: #3A436A;
     min-width: 150px;
@@ -519,7 +519,7 @@ label {
     transition: 0.2s;
 }
 
-.stu-feedback-status:hover {
+.metric:hover {
     filter: brightness(105%);
     cursor: default;
 }
@@ -528,7 +528,7 @@ label {
     background-color: #b8ffdc;
 }
 
-.status-review {
+.status-pending {
     background-color: #FBDD8F;
 }
 
@@ -540,14 +540,14 @@ label {
     background-color: #77E9C2;
 }
 
-.stu-feedback-guidelines-container {
+.feedback-guidelines-container {
     display:flex;
     flex-direction: column;
     padding:120px;
     gap:32px;
 }
 
-.stu-feedback-guidelines-container > :nth-child(1) {
+.feedback-guidelines-container > :nth-child(1) {
     font-size:48px;
 }
 
@@ -701,73 +701,6 @@ label {
     background-color: #b0cff7;
 }
 
-.metrics-container {
-    margin-bottom:84px;
-    padding:120px 0px;
-}
-
-.admin-overview, .admin-types {
-    color:white;
-}
-
-.admin-overview {
-    margin-top:120px;
-    background-color: var(--accent);
-}
-
-.admin-types {
-    background-color: var(--accent2);
-    margin-bottom:0px;
-}
-
-.metrics-container > h6 {
-    font-size: 42px;
-    letter-spacing: -0.24px;
-    margin-left: 24px;
-    text-align: center;
-    margin-bottom: 64px;
-}
-
-.metrics-box-container {
-    display:flex;
-    justify-content: center;
-    height:260px;
-    text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.3);
-    /* margin: 0px 54px; */
-}
-
-.metrics-box-container > * {
-    transition: 150ms;
-}
-
-.metrics-box-container>*:hover {
-    filter:brightness(105%);
-    cursor:default;
-    position: relative;
-    width:325px;
-}
-
-.metrics-box {
-    display:flex;
-    width:320px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 12px;
-    margin: 4px;
-    font-size: 20px;
-    letter-spacing: -0.48px;
-    color:rgb(255, 255, 255);
-}
-
-.metrics-box > h1 {
-    font-family: pt-sans-caption;
-}
-.metrics-box > h6 {
-    font-size: 16px;
-    letter-spacing: -0.4px;
-}
-
 .dashboard-admin-title {
     display:flex;
     flex-direction: column;
@@ -786,32 +719,42 @@ label {
     text-align: center;
 }
 
-.total {
-    background-color: #2F9566;
+/* metrics-container rows */
+.second {
+    background-color: white;
+    color: #3C3C3C;
 }
-.review {
-    background-color: #FBDD8F;
+
+.third {
+    background-color: var(--accent2);
 }
-.ongoing {
-    background-color: #68A8EB;
-}
-.resolved {
-    background-color: #7DD0B4;
-}
-.concerns {
-    background-color: #AA5959;
-}
-.suggestions {
-    background-color: #73BDDD;
+
+.admin-status-total {
+    background-color: #28c97d;
 }
 .weekly{
-    background-color: rgb(224, 176, 122);
+    background-color: #fdac71;
 }
 .monthly {
-    background-color: rgb(156, 199, 230);
+    background-color: #eb7f86;
+}
+.concerns {
+    background-color: #b28ef7;
+}
+.suggestions {
+    background-color: #96dbfc;
 }
 
 .index-login:hover {
     background-color: var(--accent2);
     color:white;
+}
+
+.metrics-container canvas {
+    display: block; /* Makes the canvas a block element for proper centering */
+    margin: 0 auto; /* Centers the canvas inside the container */
+    max-width: 100%; /* Ensures the chart is responsive */
+    background-color: white;
+    border-radius: 20px; /* Adds rounded corners */
+    padding: 20px;
 }

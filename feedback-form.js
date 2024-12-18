@@ -9,13 +9,36 @@ const attachmentInput = document.querySelector('#attachment');
 const typeRadioInputs = document.querySelectorAll('input[name="feedback-type"]');
 const collegeSelect = document.querySelector('#college');
 
+// Predict the category of feedback
+async function predictCategory(feedback) {
+    try {
+        const response = await fetch('http://127.0.0.1:5000/predict', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ feedback })
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch category prediction');
+        }
+
+        const data = await response.json();
+        return data.category;
+    } catch (error) {
+        console.error('Error predicting category:', error);
+        return 'Unknown'; // Fallback category
+    }
+}
+
 // Attach event listener to form submit
 feedbackForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     const title = titleInput.value;
     const description = descriptionInput.value;
-    const attachment = attachmentInput.files[0] || null; // Handle file attachment
+    const attachment = attachmentInput.files[0] || null;
     const type = [...typeRadioInputs].find(input => input.checked)?.value;
     const college = collegeSelect.value;
     const user = auth.currentUser;
@@ -29,16 +52,21 @@ feedbackForm.addEventListener('submit', async (event) => {
     // Get the current date and time for feedback submission
     const dateTime = new Date().toISOString();
 
+    // Predict category
+    const combinedText = title + ". " + description;
+    const category = await predictCategory(combinedText);
+
     // Create feedback object
     const feedbackData = {
         title,
         description,
-        attachment: attachment ? attachment.name : null, // Store file name or null if no file
+        attachment: attachment ? attachment.name : null,
         type,
         college,
         student: user.uid, // Use the UID of the logged-in user
         status: 'Pending', // Default status when submitted
-        dateTime
+        dateTime,
+        category
     };
 
     try {

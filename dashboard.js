@@ -151,6 +151,16 @@ auth.onAuthStateChanged(user => {
                             title: {
                                 display: true,
                                 text: "Automated Feedback Categorization"
+                            },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true, // The scale starts at 0
+                                        callback: function(value) { // Only show integers
+                                            return Number.isInteger(value) ? value : null; 
+                                        },
+                                    }
+                                }]
                             }
                         }
                     });

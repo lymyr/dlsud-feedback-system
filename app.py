@@ -14,9 +14,6 @@ CORS(app)  # Allow cross-origin requests for local development
 model = joblib.load('categorization_model.pkl')
 
 # Define preprocessing functions
-nltk.download('stopwords')
-nltk.download('punkt')
-nltk.download('wordnet')
 stop_words = set(stopwords.words('english'))
 lemmatizer = WordNetLemmatizer()
 
@@ -56,4 +53,7 @@ def predict():
 
 # Run the Flask app
 if __name__ == '__main__':
+    nltk.download('stopwords')
+    nltk.download('punkt')
+    nltk.download('wordnet')
     app.run(debug=True)

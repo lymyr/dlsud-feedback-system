@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const keyword = searchInput.value.trim();
         filterFeedback(null, null, null, keyword).then(feedbackList => {
             feedbackItems.innerHTML = '';
-            feedbackList.forEach((feedback, index) => displayFeedback(feedback, index));
+            feedbackList.forEach((feedback, index) => formatFeedback(feedback, index));
         }).catch(error => {
             console.error('Error fetching filtered feedback:', error);
         });

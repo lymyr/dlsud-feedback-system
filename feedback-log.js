@@ -74,8 +74,35 @@ function linearSearchKeyword(feedbackList, keyword) {
     return results;
 }
 
+// Quick Sort Function to sort the feedback list in reverse chronological order (latest to oldest)
+function quickSort(arr, left, right) {
+    if (left < right) {
+        const pivotIndex = partition(arr, left, right);
+        quickSort(arr, left, pivotIndex - 1);
+        quickSort(arr, pivotIndex + 1, right);
+    }
+}
+
+// Partition function for Quick Sort
+function partition(arr, left, right) {
+    const pivot = new Date(arr[right].dateTime); // Choose the last element as pivot
+    let i = left - 1; // Pointer for the smaller element
+
+    for (let j = left; j < right; j++) {
+        if (new Date(arr[j].dateTime) >= pivot) { // Compare with pivot (latest to oldest)
+            i++;
+            [arr[i], arr[j]] = [arr[j], arr[i]]; // Swap elements
+        }
+    }
+
+    // Swap pivot with the element at i + 1
+    [arr[i + 1], arr[right]] = [arr[right], arr[i + 1]];
+    return i + 1;
+}
+
+
 // Function to filter feedback in the table based on user (student or admin), status/date (sidebar options), and keyword
-function filterFeedback(statusFilter = null, dateFilter = null, keyword = null) {
+function filterFeedback(statusFilter = null, dateFilter = null, categoryFilter = null, keyword = null) {
     return new Promise((resolve, reject) => {
         auth.onAuthStateChanged((user) => {
             if (user) {
@@ -108,18 +135,19 @@ function filterFeedback(statusFilter = null, dateFilter = null, keyword = null) 
                                     : feedback.college === userCollege;
                             const matchesStatus = !statusFilter || feedback.status === statusFilter;
                             const matchesDate = !dateFilter || isDateInRange(feedback.dateTime, dateFilter);
+                            const matchesCategory = !categoryFilter || feedback.category === categoryFilter;
 
-                            return matchesRole && matchesStatus && matchesDate;
+                            return matchesRole && matchesStatus && matchesDate && matchesCategory;
                         });
 
                         // If keyword is provided, use linearSearchKeyword to filter further
                         if (keyword) {
                             feedbackList = linearSearchKeyword(feedbackList, keyword);
                         }
+                        //  Quick Sort (latest to oldest - reverse chronological order) based on the dateTime
+                        quickSort(feedbackList, 0, feedbackList.length - 1);
 
-                        const sortedFeedback = feedbackList.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime));
-
-                        resolve(sortedFeedback);
+                        resolve(feedbackList);
                     }, reject);
                 }, reject);
             } else {
@@ -137,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Search functionality for keyword filter
     searchInput.addEventListener('input', () => {
         const keyword = searchInput.value.trim();
-        filterFeedback(null, null, keyword).then(feedbackList => {
+        filterFeedback(null, null, null, keyword).then(feedbackList => {
             feedbackItems.innerHTML = '';
             feedbackList.forEach((feedback, index) => displayFeedback(feedback, index));
         }).catch(error => {

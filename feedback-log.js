@@ -57,8 +57,52 @@ function isDateInRange(feedbackDateTime, dateFilter) {
     return false;
 }
 
-// Function to filter feedback in the table based on user (student or admin), status/date (sidebar options)
-function filterFeedback(statusFilter = null, dateFilter = null, categoryFilter = null) {
+// Linear Search to search logs
+function linearSearchKeyword(feedbackList, keyword) {
+    const results = [];
+    const lowerKeyword = keyword.toLowerCase();
+
+    for (let i = 0; i < feedbackList.length; i++) {
+        const title = feedbackList[i].title.toLowerCase();
+
+        // Check if the title contains the keyword (anywhere in the title)
+        if (title.includes(lowerKeyword)) {
+            results.push(feedbackList[i]);
+        }
+    }
+
+    return results;
+}
+
+// Quick Sort Function to sort the feedback list in reverse chronological order (latest to oldest)
+function quickSort(arr, left, right) {
+    if (left < right) {
+        const pivotIndex = partition(arr, left, right);
+        quickSort(arr, left, pivotIndex - 1);
+        quickSort(arr, pivotIndex + 1, right);
+    }
+}
+
+// Partition function for Quick Sort
+function partition(arr, left, right) {
+    const pivot = new Date(arr[right].dateTime); // Choose the last element as pivot
+    let i = left - 1; // Pointer for the smaller element
+
+    for (let j = left; j < right; j++) {
+        if (new Date(arr[j].dateTime) >= pivot) { // Compare with pivot (latest to oldest)
+            i++;
+            [arr[i], arr[j]] = [arr[j], arr[i]]; // Swap elements
+        }
+    }
+
+    // Swap pivot with the element at i + 1
+    [arr[i + 1], arr[right]] = [arr[right], arr[i + 1]];
+    return i + 1;
+}
+
+
+// Function to filter feedback in the table based on user (student or admin), status/date (sidebar options), and keyword
+function filterFeedback(statusFilter = null, dateFilter = null, categoryFilter = null, keyword = null) {
     return new Promise((resolve, reject) => {
         auth.onAuthStateChanged((user) => {
             if (user) {
@@ -77,11 +121,14 @@ function filterFeedback(statusFilter = null, dateFilter = null, categoryFilter =
                             return;
                         }
 
-                        // Filter feedback based on role and status/date
-                        const filteredFeedback = Object.keys(feedbacks).map((key) => ({
+                        // Convert feedbacks object to an array with UIDs
+                        let feedbackList = Object.keys(feedbacks).map((key) => ({
                             ...feedbacks[key],
                             feedback_id: key // Store the feedback UIDs for Feedback View
-                        })).filter((feedback) => {
+                        }));
+
+                        // Apply filters: role, status, and date
+                        feedbackList = feedbackList.filter((feedback) => {
                             const matchesRole =
                                 userRole === 'Student'
                                     ? feedback.student === uid
@@ -93,7 +140,14 @@ function filterFeedback(statusFilter = null, dateFilter = null, categoryFilter =
                             return matchesRole && matchesStatus && matchesDate && matchesCategory;
                         });
 
-                        resolve(filteredFeedback.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime)));
+                        // If keyword is provided, use linearSearchKeyword to filter further
+                        if (keyword) {
+                            feedbackList = linearSearchKeyword(feedbackList, keyword);
+                        }
+                        //  Quick Sort (latest to oldest - reverse chronological order) based on the dateTime
+                        quickSort(feedbackList, 0, feedbackList.length - 1);
+
+                        resolve(feedbackList);
                     }, reject);
                 }, reject);
             } else {
@@ -102,6 +156,42 @@ function filterFeedback(statusFilter = null, dateFilter = null, categoryFilter =
         });
     });
 }
+
+// Search Bar Input
+document.addEventListener('DOMContentLoaded', () => {
+    const feedbackItems = document.getElementById('feedback-items');
+    const searchInput = document.getElementById('search'); 
+
+    // Search functionality for keyword filter
+    searchInput.addEventListener('input', () => {
+        const keyword = searchInput.value.trim();
+        filterFeedback(null, null, null, keyword).then(feedbackList => {
+            feedbackItems.innerHTML = '';
+            feedbackList.forEach((feedback, index) => formatFeedback(feedback, index));
+        }).catch(error => {
+            console.error('Error fetching filtered feedback:', error);
+        });
+    });
+});
+
+
+// Search Bar Input
+document.addEventListener('DOMContentLoaded', () => {
+    const feedbackItems = document.getElementById('feedback-items');
+    const searchInput = document.getElementById('search'); 
+
+    // Search functionality for keyword filter
+    searchInput.addEventListener('input', () => {
+        const keyword = searchInput.value.trim();
+        filterFeedback(null, null, null, keyword).then(feedbackList => {
+            feedbackItems.innerHTML = '';
+            feedbackList.forEach((feedback, index) => displayFeedback(feedback, index));
+        }).catch(error => {
+            console.error('Error fetching filtered feedback:', error);
+        });
+    });
+});
+
 
 // Function to format each feedback in the table
 function formatFeedback(feedback, index) {
